@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<title>Techstation ETS – Corsi gratuiti per tutti</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<style>
+:root {
+  --primary: #667eea;
+  --primary-dark: #764ba2;
+  --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --white: #ffffff;
+
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 32px;
+  --space-lg: 64px;
+
+  --radius-lg: 20px;
+  --radius-md: 12px;
+
+  --shadow-soft: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg-gradient);
+  line-height: 1.6;
+  color: #333;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 var(--space-sm);
+}
+
+section {
+  margin-top: var(--space-lg);
+}
+
+/* HERO */
+.hero {
+  padding: var(--space-lg) 0;
+  text-align: center;
+  color: white;
+}
+
+.hero h1 {
+  font-size: 2.4rem;
+  font-weight: 700;
+}
+
+.hero p {
+  margin-top: var(--space-sm);
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.beta-badge {
+  background: #ffcc00;
+  color: #333;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  margin-left: 10px;
+  font-weight: 600;
+}
+
+/* GENERIC WHITE SECTION */
+.about,
+.data-section,
+.course-grid,
+.cta,
+.course-detail,
+.contacts {
+  background: white;
+  padding: var(--space-md);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+}
+
+/* DATA SECTION */
+.subtitle {
+  color: #666;
+  margin-bottom: var(--space-md);
+}
+
+.controls {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-sm);
+}
+
+input[type="text"] {
+  padding: 12px 16px;
+  border-radius: 25px;
+  border: 1px solid #ddd;
+  flex: 1;
+  min-width: 220px;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(102,126,234,0.2);
+}
+
+button {
+  padding: 12px 20px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  background: var(--bg-gradient);
+  color: white;
+  transition: 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+#resultCount {
+  margin-bottom: var(--space-sm);
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* TABLE */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: var(--space-sm);
+}
+
+thead {
+  background: var(--bg-gradient);
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+td {
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+tbody tr:hover {
+  background: #f4f6ff;
+  transition: 0.2s;
+}
+
+td a {
+  color: var(--primary);
+  font-weight: 500;
+}
+
+/* COURSE GRID */
+.course-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+
+.course-card {
+  background: var(--bg-gradient);
+  color: white;
+  text-decoration: none;
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  text-align: center;
+  transition: 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+}
+
+.course-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+footer {
+  text-align: center;
+  margin: var(--space-lg) 0;
+  color: rgba(255,255,255,0.8);
+  font-size: 0.9rem;
+}
+
+
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="container">
+    <h1>Techstation ETS <span class="beta-badge">Beta</span></h1>
+    <p><strong>Corsi gratuiti per tutti</strong></p>
+    <p>
+      Promuoviamo l’accesso libero e consapevole alla tecnologia con corsi gratuiti
+      per tutte le età, in collaborazione con biblioteche e spazi pubblici.
+    </p>
+  </div>
+</header>
+
+<main class="container">
+
+<section class="about">
+  <h2>Chi siamo</h2>
+  <p>
+    Crediamo che il digitale debba essere uno strumento di inclusione e non un ostacolo.
+    Realizziamo percorsi formativi pratici e accessibili.
+  </p>
+</section>
+
+<section class="data-section">
+  <h2>📅 Corsi della settimana</h2>
+  <p class="subtitle">Dati caricati da Google Sheets</p>
+
+  <div class="controls">
+    <input type="text" id="searchInput" placeholder="Cerca nei corsi...">
+    <button onclick="fetchData()">Aggiorna</button>
+  </div>
+
+  <p id="resultCount"></p>
+  <div id="content"></div>
+  <p id="lastUpdate"></p>
+</section>
+
+<!-- NUOVA SEZIONE -->
+<section class="course-grid">
+  <h2>📚 Scopri di più sui nostri corsi</h2>
+
+  <div class="course-buttons">
+    <a href="#corso-sql" class="course-card">Tutti i Miei Circuiti</a>
+    <a href="#corso-web" class="course-card">Corso</a>
+    <a href="#corso-digital" class="course-card">Corso</a>
+    <a href="#corso-ai" class="course-card">Corso</a>
+  </div>
+</section>
+
+<!-- SEZIONI DETTAGLIO -->
+<section id="corso-sql" class="course-detail">
+  <h2>⚡🔌 Tutti i Miei Circuiti</h2>
+  <br>
+  <p>
+  Un laboratorio pratico per entrare nel mondo dei circuiti elettrici ed elettronici in modo semplice e divertente.
+Tra fili, batterie, LED e piccoli componenti, i partecipanti impareranno come funziona un circuito, come si accende una luce e come dare energia alle proprie idee. <br> <br>
+
+🔎 Sperimentazione diretta <br>
+💡 Comprensione dei concetti base (corrente, collegamenti, polarità) <br>
+🛠️ Costruzione di piccoli progetti funzionanti <br> <br>
+
+Un percorso perfetto per sviluppare logica, manualità e spirito di scoperta.
+  </p>
+</section>
+
+<section id="corso-web" class="course-detail">
+  <h2>Web Development</h2>
+  <p>
+    HTML, CSS e JavaScript per costruire siti moderni e responsive.
+  </p>
+</section>
+
+<section id="corso-digital" class="course-detail">
+  <h2>Competenze Digitali</h2>
+  <p>
+    Alfabetizzazione digitale per tutte le età.
+  </p>
+</section>
+
+<section id="corso-ai" class="course-detail">
+  <h2>Introduzione all'AI</h2>
+  <p>
+    Panoramica su Intelligenza Artificiale e strumenti moderni.
+  </p>
+</section>
+
+<section class="cta">
+  <h2>Resta aggiornato</h2>
+  <p>Iscriviti per ricevere informazioni sui prossimi corsi.</p>
+  <div class="subscription-options">
+    <a href="#">Canale WhatsApp</a>
+    <a href="#">Newsletter</a>
+  </div>
+</section>
+
+<section class="contacts">
+  <h2>Contatti</h2>
+  <ul>
+    <li>Email: <strong>info@techstationets.it</strong></li>
+  </ul>
+</section>
+
+</main>
+
+<footer>
+© Techstation ETS – Corsi gratuiti per tutti
+</footer>
+
+
+   
+</body>
+</html>
+
+<script>
+        // ============================================
+        // CONFIGURAZIONE - MODIFICA QUI IL TUO URL
+        // ============================================
+        const API_URL = 'https://script.google.com/macros/s/AKfycbwp2gclUaxy7XMocDWCJzTSHb3NGiqJeA01-ZryoRZNLQNqtwNSNFgC58dZhWL0e0rWzw/exec';
+
+        let allData = [];
+        let headers = [];
+
+        // ============================================
+        // FUNZIONE PRINCIPALE
+        // ============================================
+        async function fetchData() {
+            const contentDiv = document.getElementById('content');
+            contentDiv.innerHTML = '<div class="loading">Caricamento dati...</div>';
+
+            try {
+                const response = await fetch(API_URL);
+                
+                if (!response.ok) {
+                    throw new Error('Errore HTTP: ' + response.status);
+                }
+
+                const data = await response.json();
+                
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+
+                headers = data.headers;
+                allData = data.rows;
+
+                displayData(headers, allData);
+                document.getElementById('lastUpdate').textContent = 
+                    'Ultimo aggiornamento: ' + data.lastUpdate;
+                
+            } catch (error) {
+                console.error('Errore:', error);
+                contentDiv.innerHTML = `
+                    <div class="error">
+                        <strong>❌ Errore</strong><br>
+                        ${error.message}
+                    </div>
+                `;
+            }
+        }
+
+        // ============================================
+        // MOSTRA DATI - Gestisce link e testo
+        // ============================================
+        function displayData(headers, rows) {
+    const contentDiv = document.getElementById('content');
+    
+    if (rows.length === 0) {
+        contentDiv.innerHTML = '<div class="no-results">Nessun dato trovato</div>';
+        return;
+    }
+
+    let html = '<table><thead><tr>';
+    headers.forEach(header => {
+        html += `<th>${escapeHtml(header)}</th>`;
+    });
+    html += '</tr></thead><tbody>';
+
+    rows.forEach(row => {
+        html += '<tr>';
+        headers.forEach(header => {
+            const cell = row[header];
+            
+            // Se è un'immagine
+            if (cell && typeof cell === 'object' && cell.type === 'image') {
+                html += `<td><img src="${cell.url}" alt="Immagine" style="max-width: 150px; max-height: 100px; border-radius: 5px; object-fit: cover;"></td>`;
+            }
+            // Se è un link
+            else if (cell && typeof cell === 'object' && cell.type === 'link') {
+                html += `<td><a href="${cell.url}" target="_blank">${escapeHtml(cell.text)}</a></td>`;
+            }
+            // Se è una stringa URL
+            else if (typeof cell === 'string' && cell.match(/^https?:\/\//)) {
+                // Controlla se è un'immagine per estensione
+                if (cell.match(/\.(jpg|jpeg|png|gif|webp|svg)$/i)) {
+                    html += `<td><img src="${cell}" alt="Immagine" style="max-width: 150px; max-height: 100px; border-radius: 5px; object-fit: cover;"></td>`;
+                } else {
+                    html += `<td><a href="${cell}" target="_blank">${escapeHtml(cell)}</a></td>`;
+                }
+            }
+            // Testo normale
+            else {
+                html += `<td>${escapeHtml(cell !== null && cell !== undefined ? cell : '')}</td>`;
+            }
+        });
+        html += '</tr>';
+    });
+
+    html += '</tbody></table>';
+    contentDiv.innerHTML = html;
+}
+        // ============================================
+        // UTILITY
+        // ============================================
+        function escapeHtml(text) {
+            if (text === null || text === undefined) return '';
+            const div = document.createElement('div');
+            div.textContent = String(text);
+            return div.innerHTML;
+        }
+
+        // ============================================
+        // RICERCA
+        // ============================================
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase().trim();
+            
+            if (searchTerm === '') {
+                displayData(headers, allData);
+                return;
+            }
+
+            const filtered = allData.filter(row => {
+                return Object.values(row).some(value => {
+                    // Cerca sia nel testo che nell'URL se è un link
+                    if (value && typeof value === 'object' && value.type === 'link') {
+                        return value.text.toLowerCase().includes(searchTerm) || 
+                               value.url.toLowerCase().includes(searchTerm);
+                    }
+                    return String(value).toLowerCase().includes(searchTerm);
+                });
+            });
+
+            displayData(headers, filtered);
+        });
+
+        // ============================================
+        // AVVIO
+        // ============================================
+        fetchData();
+</script>
