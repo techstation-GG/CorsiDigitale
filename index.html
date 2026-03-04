@@ -3,10 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <title>Techstation ETS – Corsi gratuiti per tutti</title>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-
-<style>
-:root {
+<style> :root {
   --primary: #667eea;
   --primary-dark: #764ba2;
   --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -213,121 +210,7 @@ footer {
 
 
 </style>
-</head>
-<body>
-
-<header class="hero">
-  <div class="container">
-    <h1>Techstation ETS <span class="beta-badge">Beta</span></h1>
-    <p><strong>Corsi gratuiti per tutti</strong></p>
-    <p>
-      Promuoviamo l’accesso libero e consapevole alla tecnologia con corsi gratuiti
-      per tutte le età, in collaborazione con biblioteche e spazi pubblici.
-    </p>
-  </div>
-</header>
-
-<main class="container">
-
-<section class="about">
-  <h2>Chi siamo</h2>
-  <p>
-    Crediamo che il digitale debba essere uno strumento di inclusione e non un ostacolo.
-    Realizziamo percorsi formativi pratici e accessibili.
-  </p>
-</section>
-
-<section class="data-section">
-  <h2>📅 Corsi della settimana</h2>
-  <p class="subtitle">Dati caricati da Google Sheets</p>
-
-  <div class="controls">
-    <input type="text" id="searchInput" placeholder="Cerca nei corsi...">
-    <button onclick="fetchData()">Aggiorna</button>
-  </div>
-
-  <p id="resultCount"></p>
-  <div id="content"></div>
-  <p id="lastUpdate"></p>
-</section>
-
-<!-- NUOVA SEZIONE -->
-<section class="course-grid">
-  <h2>📚 Scopri di più sui nostri corsi</h2>
-
-  <div class="course-buttons">
-    <a href="#corso-sql" class="course-card">Tutti i Miei Circuiti</a>
-    <a href="#corso-web" class="course-card">Corso</a>
-    <a href="#corso-digital" class="course-card">Corso</a>
-    <a href="#corso-ai" class="course-card">Corso</a>
-  </div>
-</section>
-
-<!-- SEZIONI DETTAGLIO -->
-<section id="corso-sql" class="course-detail">
-  <h2>⚡🔌 Tutti i Miei Circuiti</h2>
-  <br>
-  <p>
-  Un laboratorio pratico per entrare nel mondo dei circuiti elettrici ed elettronici in modo semplice e divertente.
-Tra fili, batterie, LED e piccoli componenti, i partecipanti impareranno come funziona un circuito, come si accende una luce e come dare energia alle proprie idee. <br> <br>
-
-🔎 Sperimentazione diretta <br>
-💡 Comprensione dei concetti base (corrente, collegamenti, polarità) <br>
-🛠️ Costruzione di piccoli progetti funzionanti <br> <br>
-
-Un percorso perfetto per sviluppare logica, manualità e spirito di scoperta.
-  </p>
-</section>
-
-<section id="corso-web" class="course-detail">
-  <h2>Web Development</h2>
-  <p>
-    HTML, CSS e JavaScript per costruire siti moderni e responsive.
-  </p>
-</section>
-
-<section id="corso-digital" class="course-detail">
-  <h2>Competenze Digitali</h2>
-  <p>
-    Alfabetizzazione digitale per tutte le età.
-  </p>
-</section>
-
-<section id="corso-ai" class="course-detail">
-  <h2>Introduzione all'AI</h2>
-  <p>
-    Panoramica su Intelligenza Artificiale e strumenti moderni.
-  </p>
-</section>
-
-<section class="cta">
-  <h2>Resta aggiornato</h2>
-  <p>Iscriviti per ricevere informazioni sui prossimi corsi.</p>
-  <div class="subscription-options">
-    <a href="#">Canale WhatsApp</a>
-    <a href="#">Newsletter</a>
-  </div>
-</section>
-
-<section class="contacts">
-  <h2>Contatti</h2>
-  <ul>
-    <li>Email: <strong>info@techstationets.it</strong></li>
-  </ul>
-</section>
-
-</main>
-
-<footer>
-© Techstation ETS – Corsi gratuiti per tutti
-</footer>
-
-
-   
-</body>
-</html>
-
-<script>
+<script>   
         // ============================================
         // CONFIGURAZIONE - MODIFICA QUI IL TUO URL
         // ============================================
@@ -463,4 +346,363 @@ Un percorso perfetto per sviluppare logica, manualità e spirito di scoperta.
         // AVVIO
         // ============================================
         fetchData();
-</script>
+
+ </script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+</head>
+<body>
+
+<header class="hero">
+  <div class="container">
+    <h1>Techstation ETS <span class="beta-badge">Beta</span></h1>
+    <p><strong>Corsi gratuiti per tutti</strong></p>
+    <p>
+      Promuoviamo l’accesso libero e consapevole alla tecnologia con corsi gratuiti
+      per tutte le età, in collaborazione con biblioteche e spazi pubblici.
+    </p>
+  </div>
+</header>
+
+<main class="container">
+
+<section class="about">
+  <h2>Chi siamo</h2>
+  <p>
+    Crediamo che il digitale debba essere uno strumento di inclusione e non un ostacolo.
+    Realizziamo percorsi formativi pratici e accessibili.
+  </p>
+</section>
+
+<section class="data-section">
+  <h2>📅 Corsi della settimana</h2>
+  <p class="subtitle">Dati caricati da Google Sheets</p>
+
+  <div class="controls">
+    <input type="text" id="searchInput" placeholder="Cerca nei corsi...">
+    <button onclick="fetchData()">Aggiorna</button>
+  </div>
+
+  <p id="resultCount"></p>
+  <div id="content"></div>
+  <p id="lastUpdate"></p>
+</section>
+
+<!-- Sezione corsi e tabellona  -->
+<section class="course-grid">
+  <h2>📚 Scopri di più sui nostri corsi</h2>
+      <h3>📚 Adulti  </h3>
+  <div class="course-buttons">
+    <a href="#" class="course-card">1</a>
+    <a href="#Cybersecurity" class="course-card">Cybersecurity per tutti</a>
+    <a href="#excel" class="course-card">📊💻 I nostri corsi Excel</a>
+    <a href="#corso-ai" class="course-card">Corso</a>
+    <a href="#" class="course-card">lorem</a>
+    <a href="#" class="course-card">L</a>
+    <a href="#" class="course-card">Corso</a>
+  </div>
+  <br>
+
+
+        <h3>📚 kids </h3>
+  <div class="course-buttons">
+    <a href="#circuiti" class="course-card">Tutti i Miei Circuiti</a>
+    <a href="#" class="course-card">lorem</a>
+    <a href="#" class="course-card">L</a>
+    <a href="#" class="course-card">Corso</a>
+  </div>
+</section>
+
+<!-- SEZIONI DETTAGLIO -->
+<section id="circuiti" class="course-detail">
+  <h2>⚡🔌 Tutti i Miei Circuiti</h2>
+  <br>
+  <p>
+  Un laboratorio pratico per entrare nel mondo dei circuiti elettrici ed elettronici in modo semplice e divertente.
+Tra fili, batterie, LED e piccoli componenti, i partecipanti impareranno come funziona un circuito, come si accende una luce e come dare energia alle proprie idee. <br> <br>
+
+🔎 Sperimentazione diretta <br>
+💡 Comprensione dei concetti base (corrente, collegamenti, polarità) <br>
+🛠️ Costruzione di piccoli progetti funzionanti <br> <br>
+
+Un percorso perfetto per sviluppare logica, manualità e spirito di scoperta.
+  </p>
+</section>
+
+<section id="Cybersecurity" class="course-detail">
+  <h2>💻 Cybersecurity per tutti</h2>
+  <p>
+
+    <br>
+
+“Proteggi i tuoi dati nella vita di ogni giorno”
+
+Un corso per riconoscere le principali minacce online e adottare comportamenti sicuri nella navigazione, negli acquisti e nella comunicazione digitale.
+<br>
+🚨 Riconoscere truffe e phishing<br>
+🔑 Creare password efficaci<br>
+🌐 Navigare in sicurezza<br>
+  </p>
+</section>
+
+<section id="corso-digital" class="course-detail">
+  <h2>Competenze Digitali</h2>
+  <p>
+    💬📲 WhatsApp senza stress
+
+“Messaggi, chiamate e buone maniere digitali”
+
+Un incontro dedicato a imparare a usare WhatsApp in modo semplice e corretto, evitando errori e confusione nei gruppi.
+
+📸 Invio di foto e documenti
+👥 Gestione dei gruppi
+🔐 Privacy e sicurezza
+  </p>
+</section>
+
+<section id="excel" class="course-detail">
+  <h2>📊💻 I nostri corsi Excel</h2>
+  <p>
+
+
+Un percorso completo, dall’introduzione alle funzioni avanzate
+
+La nostra offerta formativa su Excel è strutturata come un percorso progressivo, pensato per accompagnare ogni partecipante dal primo approccio al foglio di calcolo fino alle funzionalità più avanzate di analisi e gestione dei dati.
+
+Si parte dai corsi introduttivi – ideali per chi non ha mai utilizzato Excel o desidera consolidare le basi – per imparare a orientarsi nell’interfaccia, inserire dati, organizzare informazioni e utilizzare le prime formule.
+
+Si prosegue con il livello base, dedicato alle formule fondamentali e ai calcoli automatici, per acquisire sicurezza nelle operazioni quotidiane.
+
+Il livello intermedio permette di fare un salto di qualità, imparando a gestire grandi quantità di dati, utilizzare filtri avanzati e analizzare le informazioni attraverso le tabelle pivot.
+
+Infine, il livello avanzato approfondisce funzioni di ricerca e strumenti evoluti (come CERCA.X e altre funzioni di collegamento tra dati), per lavorare in modo più strutturato ed efficiente anche in ambito professionale.
+
+🎯 Percorso modulare e graduale
+📈 Crescita progressiva delle competenze
+🛠️ Approccio pratico, orientato a casi reali
+
+Un’offerta pensata per rispondere a esigenze diverse: dalla gestione personale dei dati fino all’utilizzo professionale di Excel.  </p>
+</section>
+
+<section id="abc-digitale" class="course-detail">
+  <h2>📘💻 ABC del Digitale</h2>
+  <p>
+    Competenze base per la vita quotidiana.
+    Un corso introduttivo pensato per acquisire sicurezza nell’uso di computer, internet e strumenti digitali essenziali.
+    🌐 Navigare in sicurezza
+    📧 Usare email e strumenti base
+    🧭 Orientarsi nel mondo digitale con autonomia
+  </p>
+</section>
+
+<section id="capire-ai" class="course-detail">
+  <h2>🤖🧠 Capire l’Intelligenza Artificiale</h2>
+  <p>
+    Cos’è, come funziona, perché ci riguarda.
+    Un incontro divulgativo per comprendere in modo chiaro cosa sia l’AI e come sta trasformando lavoro e vita quotidiana.
+    🔎 Concetti spiegati in modo semplice
+    💼 Impatti concreti su professioni e società
+    ⚖️ Opportunità e limiti
+  </p>
+</section>
+
+<section id="ai-quotidiana" class="course-detail">
+  <h2>✨🤖 AI per la vita quotidiana</h2>
+  <p>
+    ChatGPT, Copilot e strumenti utili.
+    Un laboratorio pratico per imparare a utilizzare strumenti di intelligenza artificiale nella vita di tutti i giorni.
+    ✍️ Scrivere e rielaborare testi
+    📊 Supporto nello studio e nel lavoro
+    ⚙️ Uso consapevole e strategico
+  </p>
+</section>
+
+<section id="ai-professioni" class="course-detail">
+  <h2>👩‍💼🚀 AI e professioni</h2>
+  <p>
+    Strumenti per settori specifici.
+    Un corso dedicato a chi vuole integrare l’AI nel proprio ambito professionale.
+    📂 Applicazioni concrete
+    🛠️ Automazione e ottimizzazione
+    🎯 Casi reali
+  </p>
+</section>
+
+<section id="smartphone-facile" class="course-detail">
+  <h2>📱✨ Smartphone facile e sicuro</h2>
+  <p>
+    Comunicare, proteggersi, imparare.
+    Un percorso pratico per usare lo smartphone con maggiore autonomia e sicurezza.
+    💬 Funzioni essenziali
+    🔐 Privacy e protezione dati
+    📲 App utili
+  </p>
+</section>
+
+<section id="smartphone-su-misura" class="course-detail">
+  <h2>⚙️📲 Smartphone su misura</h2>
+  <p>
+    Regolare il tuo cellulare passo per passo.
+    Imparare a personalizzare impostazioni, notifiche e sicurezza.
+    🔧 Configurazioni guidate
+    🔔 Gestione notifiche
+    🛡️ Maggiore controllo
+  </p>
+</section>
+
+<section id="google-smartphone" class="course-detail">
+  <h2>🔎📱 Google e smartphone</h2>
+  <p>
+    Le basi per gestirlo in tranquillità.
+    Account Google, Gmail, Play Store e sincronizzazione spiegati con chiarezza.
+    ☁️ Gestione account
+    📩 Email e calendario
+    📦 Archiviazione e backup
+  </p>
+</section>
+
+<section id="navigare-online" class="course-detail">
+  <h2>🛍️🌐 Navigare e acquistare online in sicurezza</h2>
+  <p>
+    Guida pratica per tutti.
+    Consigli concreti per acquistare online senza rischi.
+    💳 Pagamenti sicuri
+    🚨 Riconoscere truffe
+    📦 Monitorare ordini
+  </p>
+</section>
+
+<section id="cybersecurity" class="course-detail">
+  <h2>🛡️💻 Cybersecurity per tutti</h2>
+  <p>
+    Proteggi i tuoi dati ogni giorno.
+    Un corso per riconoscere minacce digitali e adottare comportamenti sicuri.
+    🔑 Password efficaci
+    📧 Phishing e truffe
+    🌐 Navigazione protetta
+  </p>
+</section>
+
+<section id="fake-news" class="course-detail">
+  <h2>📰🔍 Le Fake News</h2>
+  <p>
+    Come si originano, come identificarle e combatterle.
+    Strumenti concreti per riconoscere notizie false e disinformazione.
+    🔎 Verifica delle fonti
+    📲 Social e viralità
+    🧠 Pensiero critico
+  </p>
+</section>
+
+<section id="project-smart" class="course-detail">
+  <h2>📋🚀 Project Smart</h2>
+  <p>
+    Organizzare progetti e idee con strumenti digitali.
+    Strumenti pratici per pianificare attività e collaborare online.
+    🗓️ Pianificazione efficace
+    📂 Condivisione
+    🎯 Obiettivi chiari
+  </p>
+</section>
+
+<section id="canva" class="course-detail">
+  <h2>📸🎨 Canva per tutti</h2>
+  <p>
+    Grafica facile per comunicare online.
+    Creare grafiche, locandine e contenuti social in modo semplice.
+    🖼️ Template pronti
+    ✏️ Personalizzazione creativa
+    📲 Condivisione immediata
+  </p>
+</section>
+
+<section id="robotica-lego" class="course-detail">
+  <h2>🤖🧱 Robotica con LEGO SPIKE Prime</h2>
+  <p>
+    Costruisci, programma, impara.
+    Laboratorio di robotica educativa per costruire e programmare robot.
+    ⚙️ Costruzione meccanica
+    💻 Programmazione
+    🏁 Sfide creative
+  </p>
+</section>
+
+<section id="makey-makey" class="course-detail">
+  <h2>🎹🔌 Makey Makey</h2>
+  <p>
+    Sperimenta l’elettronica giocando.
+    Trasforma oggetti comuni in strumenti interattivi.
+    ⚡ Conducibilità
+    🎮 Giochi e musica
+    🧠 Creatività tecnologica
+  </p>
+</section>
+
+<section id="microbit" class="course-detail">
+  <h2>🤖💡 Micro:bit Makers Lab</h2>
+  <p>
+    Programma il tuo primo dispositivo intelligente.
+    Coding ed elettronica con sensori e LED.
+    💻 Programmazione visuale
+    🔁 Esperimenti interattivi
+    🚀 Creatività digitale
+  </p>
+</section>
+
+<section id="arduino" class="course-detail">
+  <h2>🔧🤖 Scopriamo Arduino</h2>
+  <p>
+    Primi passi nella programmazione elettronica.
+    Introduzione alla piattaforma Arduino e ai suoi utilizzi.
+    ⚡ Circuiti e sensori
+    💻 Programmazione base
+    🛠️ Prototipi creativi
+  </p>
+</section>
+
+<section id="musica-piante" class="course-detail">
+  <h2>🌿🎶 La musica delle piante</h2>
+  <p>
+    Creazione di un’opera sonora collettiva.
+    Un laboratorio che unisce natura, tecnologia e suono.
+    🌱 Sensori e segnali naturali
+    🎼 Composizione condivisa
+    🎧 Esperienza immersiva
+  </p>
+</section>
+
+<section id="lorem" class="course-detail">
+  <h2>ipsum</h2>
+  <p>
+    mensat lorem 
+  </p>
+</section>
+
+<section class="cta">
+  <h2>Resta aggiornato</h2>
+  <p>Iscriviti per ricevere informazioni sui prossimi corsi.</p>
+  <div class="subscription-options">
+    <a href="#">Canale WhatsApp</a>
+    <a href="#">Newsletter</a>
+  </div>
+</section>
+
+<section class="contacts">
+  <h2>Contatti</h2>
+  <ul>
+    <li>Email: <strong>info@techstationets.it</strong></li>
+  </ul>
+</section>
+
+</main>
+
+<footer>
+© Techstation ETS – Corsi gratuiti per tutti
+</footer>
+
+
+   
+</body>
+</html>
+
+
