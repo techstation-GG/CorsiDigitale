@@ -2,724 +2,1403 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Techstation ETS – Corsi gratuiti per tutti</title>
-<style> :root {
-  --primary: #667eea;
-  --primary-dark: #764ba2;
-  --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --p1: #5b5ef4;
+  --p2: #a855f7;
+  --grad: linear-gradient(135deg, #5b5ef4 0%, #a855f7 100%);
+  --grad-soft: linear-gradient(135deg, #ede9fe 0%, #dbeafe 100%);
+  --bg: #0f0e17;
+  --surface: #16151f;
+  --surface2: #1e1d2b;
+  --border: rgba(255,255,255,0.07);
+  --text: #f0eeff;
+  --text-muted: #9b97b8;
   --white: #ffffff;
-
-  --space-xs: 8px;
-  --space-sm: 16px;
-  --space-md: 32px;
-  --space-lg: 64px;
-
-  --radius-lg: 20px;
-  --radius-md: 12px;
-
-  --shadow-soft: 0 10px 30px rgba(0,0,0,0.08);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --shadow: 0 8px 32px rgba(0,0,0,0.4);
+  --shadow-glow: 0 0 40px rgba(91,94,244,0.2);
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'Segoe UI', system-ui, sans-serif;
-  background: var(--bg-gradient);
-  line-height: 1.6;
-  color: #333;
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+/* ── NOISE TEXTURE OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
 }
 
 .container {
-  max-width: 1100px;
+  max-width: 1120px;
   margin: 0 auto;
-  padding: 0 var(--space-sm);
+  padding: 0 24px;
+  position: relative;
+  z-index: 1;
 }
 
-section {
-  margin-top: var(--space-lg);
-}
-
-/* HERO */
+/* ── HERO ── */
 .hero {
-  padding: var(--space-lg) 0;
-  text-align: center;
-  color: white;
-}
-
-.hero h1 {
-  font-size: 2.4rem;
-  font-weight: 700;
-}
-
-.hero p {
-  margin-top: var(--space-sm);
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.beta-badge {
-  background: #ffcc00;
-  color: #333;
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-  margin-left: 10px;
-  font-weight: 600;
-}
-
-/* GENERIC WHITE SECTION */
-.about,
-.data-section,
-.course-grid,
-.cta,
-.course-detail,
-.contacts {
-  background: white;
-  padding: var(--space-md);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-soft);
-}
-
-/* DATA SECTION */
-.subtitle {
-  color: #666;
-  margin-bottom: var(--space-md);
-}
-
-.controls {
-  display: flex;
-  gap: var(--space-sm);
-  flex-wrap: wrap;
-  margin-bottom: var(--space-sm);
-}
-
-input[type="text"] {
-  padding: 12px 16px;
-  border-radius: 25px;
-  border: 1px solid #ddd;
-  flex: 1;
-  min-width: 220px;
-}
-
-input[type="text"]:focus {
-  outline: none;
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(102,126,234,0.2);
-}
-
-button {
-  padding: 12px 20px;
-  border-radius: 25px;
-  border: none;
-  cursor: pointer;
-  font-weight: 600;
-  background: var(--bg-gradient);
-  color: white;
-  transition: 0.2s ease;
-}
-
-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-#resultCount {
-  margin-bottom: var(--space-sm);
-  font-size: 0.9rem;
-  color: #666;
-}
-
-/* TABLE */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: var(--space-sm);
-}
-
-thead {
-  background: var(--bg-gradient);
-  color: white;
-  position: sticky;
-  top: 0;
-  z-index: 2;
-}
-
-th, td {
-  padding: 12px;
-  text-align: left;
-  font-size: 0.9rem;
-}
-
-td {
-  border-bottom: 1px solid rgba(0,0,0,0.05);
-}
-
-tbody tr:hover {
-  background: #f4f6ff;
-  transition: 0.2s;
-}
-
-td a {
-  color: var(--primary);
-  font-weight: 500;
-}
-
-/* COURSE GRID */
-.course-buttons {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: var(--space-sm);
-  margin-top: var(--space-md);
-}
-
-.course-card {
-  background: var(--bg-gradient);
-  color: white;
-  text-decoration: none;
-  padding: var(--space-md);
-  border-radius: var(--radius-md);
-  font-weight: 600;
-  text-align: center;
-  transition: 0.2s ease;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 120px;
+  text-align: center;
+  padding: 120px 24px 80px;
+  position: relative;
+  overflow: hidden;
 }
 
-.course-card:hover {
+.hero-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+}
+.hero-orb-1 {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(91,94,244,0.35) 0%, transparent 70%);
+  top: -150px; left: -100px;
+  animation: drift 8s ease-in-out infinite alternate;
+}
+.hero-orb-2 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(168,85,247,0.3) 0%, transparent 70%);
+  bottom: -100px; right: -80px;
+  animation: drift 10s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes drift {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(30px, 20px) scale(1.05); }
+}
+
+.hero-inner { position: relative; z-index: 2; }
+
+.beta-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(91,94,244,0.2);
+  border: 1px solid rgba(91,94,244,0.4);
+  color: #a5b4fc;
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.beta-badge::before { content: '●'; color: #5b5ef4; font-size: 8px; }
+
+.hero h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, #fff 30%, #c4b5fd 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 24px;
+}
+
+.hero-sub {
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  max-width: 580px;
+  margin: 0 auto 48px;
+  font-weight: 300;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--grad);
+  color: white;
+  padding: 16px 32px;
+  border-radius: 100px;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 24px rgba(91,94,244,0.4);
+}
+.hero-cta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 32px rgba(91,94,244,0.5);
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  animation: bounce 2s ease-in-out infinite;
+}
+.scroll-hint svg { opacity: 0.5; }
+@keyframes bounce {
+  0%,100% { transform: translateX(-50%) translateY(0); }
+  50%      { transform: translateX(-50%) translateY(6px); }
+}
+
+/* ── SECTIONS ── */
+.section {
+  padding: 80px 0;
+}
+
+.section-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--p1);
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+
+.section-subtitle {
+  color: var(--text-muted);
+  font-size: 1rem;
+  max-width: 600px;
+  margin-bottom: 48px;
+}
+
+/* ── CARD BASE ── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px;
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+.card:hover {
+  border-color: rgba(91,94,244,0.3);
   transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  box-shadow: var(--shadow-glow);
 }
 
+/* ── CHI SIAMO ── */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+@media(max-width:680px){ .about-grid { grid-template-columns: 1fr; } }
+
+.about-stat {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  text-align: center;
+}
+.about-stat .num {
+  font-family: 'Syne', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.about-stat .label { color: var(--text-muted); font-size: 0.9rem; margin-top: 4px; }
+
+.about-text {
+  grid-column: 1 / -1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px;
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+/* ── CORSI SECTION ── */
+.category-block { margin-bottom: 64px; }
+
+.category-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.category-icon {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  background: var(--grad);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+.category-header h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+.category-count {
+  margin-left: auto;
+  background: rgba(91,94,244,0.15);
+  color: #a5b4fc;
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* ── COURSE GRID ── */
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.course-card {
+  display: block;
+  text-decoration: none;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 20px;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+.course-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--grad);
+  opacity: 0;
+  transition: opacity 0.25s;
+  z-index: 0;
+}
+.course-card:hover::after { opacity: 0.06; }
+.course-card:hover {
+  border-color: rgba(91,94,244,0.5);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.35), 0 0 0 1px rgba(91,94,244,0.2);
+}
+
+.course-card-inner { position: relative; z-index: 1; }
+
+.course-emoji {
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+  display: block;
+  line-height: 1;
+}
+.course-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.course-desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+.course-arrow {
+  position: absolute;
+  top: 20px; right: 20px;
+  color: var(--p1);
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: all 0.2s;
+  font-size: 1rem;
+}
+.course-card:hover .course-arrow { opacity: 1; transform: translateX(0); }
+
+/* ── SCHEDULE ── */
+.schedule-wrap {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.schedule-toolbar {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface2);
+}
+
+.search-input {
+  flex: 1;
+  min-width: 200px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 10px 18px;
+  border-radius: 100px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.search-input::placeholder { color: var(--text-muted); }
+.search-input:focus {
+  outline: none;
+  border-color: var(--p1);
+  box-shadow: 0 0 0 3px rgba(91,94,244,0.15);
+}
+
+.refresh-btn {
+  background: var(--grad);
+  color: white;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 100px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex; align-items: center; gap: 8px;
+}
+.refresh-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(91,94,244,0.4);
+}
+
+.schedule-table-wrap {
+  overflow-x: auto;
+  padding: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+thead { background: var(--surface2); }
+th {
+  padding: 14px 16px;
+  text-align: left;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+td {
+  padding: 14px 16px;
+  font-size: 0.88rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+tbody tr:last-child td { border-bottom: none; }
+tbody tr { transition: background 0.15s; }
+tbody tr:hover { background: var(--surface2); }
+td a { color: #a5b4fc; font-weight: 500; }
+
+.result-count {
+  padding: 10px 24px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+  background: var(--surface2);
+}
+
+.last-update {
+  padding: 10px 24px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+}
+
+.loading-state, .empty-state {
+  padding: 60px 24px;
+  text-align: center;
+  color: var(--text-muted);
+}
+.loading-spinner {
+  width: 36px; height: 36px;
+  border: 3px solid var(--border);
+  border-top-color: var(--p1);
+  border-radius: 50%;
+  margin: 0 auto 16px;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── DETAIL SECTIONS ── */
+.detail-section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 48px;
+  margin-bottom: 24px;
+  scroll-margin-top: 100px;
+  position: relative;
+  overflow: hidden;
+}
+.detail-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--grad);
+}
+
+.detail-section h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.detail-section p {
+  color: var(--text-muted);
+  line-height: 1.8;
+  font-size: 0.95rem;
+}
+
+.detail-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+.tag {
+  background: rgba(91,94,244,0.12);
+  border: 1px solid rgba(91,94,244,0.25);
+  color: #a5b4fc;
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* ── CTA SECTION ── */
+.cta-section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 64px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-section::before {
+  content: '';
+  position: absolute;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(91,94,244,0.15) 0%, transparent 70%);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.cta-section h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.cta-section p { color: var(--text-muted); margin-bottom: 36px; }
+
+.cta-btns {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  border-radius: 100px;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: all 0.2s;
+}
+.cta-btn-primary {
+  background: var(--grad);
+  color: white;
+  box-shadow: 0 4px 20px rgba(91,94,244,0.35);
+}
+.cta-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(91,94,244,0.5); }
+.cta-btn-ghost {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.cta-btn-ghost:hover { border-color: rgba(91,94,244,0.4); background: rgba(91,94,244,0.05); }
+
+/* ── CONTACTS ── */
+.contacts-section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.contacts-section h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.contact-email {
+  color: #a5b4fc;
+  font-weight: 500;
+  text-decoration: none;
+}
+.contact-email:hover { text-decoration: underline; }
+
+/* ── FOOTER ── */
 footer {
   text-align: center;
-  margin: var(--space-lg) 0;
-  color: rgba(255,255,255,0.8);
-  font-size: 0.9rem;
+  padding: 40px 24px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  position: relative;
+  z-index: 1;
 }
 
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(15,14,23,0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+}
+.nav-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 1.1rem;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-decoration: none;
+}
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+.nav-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--text); }
 
+@media(max-width:600px) { .nav-links { display: none; } }
+
+/* ── DIVIDER ── */
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 80px 0;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fadeUp 0.6s ease forwards; }
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
 </style>
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
 </head>
 <body>
 
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Techstation ETS</a>
+    <ul class="nav-links">
+      <li><a href="#corsi">Corsi</a></li>
+      <li><a href="#calendario">Calendario</a></li>
+      <li><a href="#contatti">Contatti</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
 <header class="hero">
-  <div class="container">
-    <h1>Techstation ETS <span class="beta-badge">Beta</span></h1>
-    <p><strong>Corsi gratuiti per tutti</strong></p>
-    <p>
-      Promuoviamo l’accesso libero e consapevole alla tecnologia con corsi gratuiti
-      per tutte le età, in collaborazione con biblioteche e spazi pubblici.
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="hero-inner fade-up">
+    <div class="beta-badge">Beta · Versione pubblica</div>
+    <h1>Corsi gratuiti<br>per tutti</h1>
+    <p class="hero-sub">
+      Promuoviamo l'accesso libero e consapevole alla tecnologia con percorsi formativi
+      pratici, per tutte le età, in collaborazione con biblioteche e spazi pubblici.
     </p>
+    <a href="#corsi" class="hero-cta">
+      Scopri i corsi
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
+  <div class="scroll-hint">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+      <path d="M10 4v12M5 12l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Scorri
   </div>
 </header>
 
 <main class="container">
 
-<section class="about">
-  <h2>Chi siamo</h2>
-  <p>
-    Crediamo che il digitale debba essere uno strumento di inclusione e non un ostacolo.
-    Realizziamo percorsi formativi pratici e accessibili.
-  </p>
-</section>
+  <!-- CHI SIAMO -->
+  <section class="section">
+    <div class="section-label">Chi siamo</div>
+    <h2 class="section-title">Digitale come strumento<br>di inclusione</h2>
+    <div class="about-grid">
+      <div class="about-stat"><div class="num">100%</div><div class="label">Corsi gratuiti</div></div>
+      <div class="about-stat"><div class="num">Tutte</div><div class="label">Fasce d'età</div></div>
+      <p class="about-text">
+        Crediamo che il digitale debba essere uno strumento di inclusione e non un ostacolo. Realizziamo percorsi
+        formativi pratici e accessibili, pensati per chi si avvicina per la prima volta alla tecnologia e per chi
+        vuole approfondire. Operiamo in collaborazione con biblioteche civiche e spazi pubblici, portando la
+        formazione dove le persone vivono.
+      </p>
+    </div>
+  </section>
 
-<section class="data-section">
-  <h2>📅 Corsi della settimana</h2>
-  <p class="subtitle">Dati caricati da Google Sheets</p>
+  <div class="divider"></div>
 
-  <div class="controls">
-    <input type="text" id="searchInput" placeholder="Cerca nei corsi...">
-    <button onclick="fetchData()">Aggiorna</button>
-  </div>
+  <!-- CORSI -->
+  <section class="section" id="corsi">
+    <div class="section-label">La nostra offerta formativa</div>
+    <h2 class="section-title">I nostri corsi</h2>
+    <p class="section-subtitle">Percorsi modulari pensati per livelli ed esigenze diverse. Clicca su un corso per scoprire i dettagli.</p>
 
-  <p id="resultCount"></p>
-  <div id="content"></div>
-  <p id="lastUpdate"></p>
-</section>
+    <!-- ADULTI -->
+    <div class="category-block">
+      <div class="category-header">
+        <div class="category-icon">👩‍💻</div>
+        <h3>Corsi per adulti</h3>
+        <span class="category-count">16 corsi</span>
+      </div>
+      <div class="course-grid">
 
-<!-- Sezione corsi e tabellona  -->
-<section class="course-grid">
-  <h2>📚 Scopri di più sui nostri corsi</h2>
+        <a href="#cybersecurity" class="course-card">
+          <div class="course-card-inner">
+            <span class="course-emoji">🛡️</span>
+            <div class="course-name">Cybersecurity per tutti</div>
+            <div class="course-desc">Proteggi i tuoi dati nella vita di ogni giorno.</div>
+          </div>
+          <span class="course-arrow">→</span>
+        </a>
 
-  <br><br>
-      <h3>📚 Adulti  </h3>
+        <a href="#excel" class="course-card">
+          <div class="course-card-inner">
+            <span class="course-emoji">📊</span>
+            <div class="course-name">I nostri corsi Excel</div>
+            <div class="course-desc">Dal livello base al livello avanzato, percorso modulare.</div>
+          </div>
+          <span class="course-arrow">→</span>
+        </a>
 
-  <br>
-  <div class="course-buttons">
-    <a href="#" class="course-card">1</a>
-    <a href="#Cybersecurity" class="course-card">Cybersecurity per tutti</a>
-    <a href="#excel" class="course-card">📊💻 I nostri corsi Excel</a>
-    <a href="#corso-ai" class="course-card">Corso</a>
-    <a href="#" class="course-card">lorem</a>
-    <a href="#" class="course-card">L</a>
-    <a href="#" class="course-card">Corso</a>
-    <a href="#" class="course-card">Corso</a>
-     <a href="#" class="course-card">Corso</a>
-     <a href="#" class="course-card">Corso</a>
-     <a href="#" class="course-card">Corso</a>
-     <a href="#" class="course-card">Corso</a>
-     <a href="#" class="course-card">Corso</a>
-     <a href="#" class="course-card">Corso</a>
-     <a href="#" class="course-card">Corso</a>
-     <a href="#" class="course-card">Corso</a>
-  </div>
-  <br>
+        <a href="#corso-ai" class="course-card">
+          <div class="course-card-inner">
+            <span class="course-emoji">🤖</span>
+            <div class="course-name">Capire l'Intelligenza Artificiale</div>
+            <div class="course-desc">Cos'è, come funziona, perché ci riguarda.</div>
+          </div>
+          <span class="course-arrow">→</span>
+        </a>
 
+        <a href="#ai-quotidiana" class="course-card">
+          <div class="course-card-inner">
+            <span class="course-emoji">✨</span>
+            <div class="course-name">AI per la vita quotidiana</div>
+            <div class="course-desc">ChatGPT, Copilot e strumenti utili ogni giorno.</div>
+          </div>
+          <span class="course-arrow">→</span>
+        </a>
 
-        <h3>📚 kids </h3>
-  <div class="course-buttons">
-    <a href="#circuiti" class="course-card">Tutti i Miei Circuiti</a>
-    <a href="#" class="course-card">Lego</a>
-    <a href="#" class="course-card">musica delle piante</a>
-    <a href="#" class="course-card">arduino</a>
-     <a href="#" class="course-card">makey makey</a>
-  </div>
-</section>
+        <a href="#ai-professioni" class="course-card">
+          <div class="course-card-inner">
+            <span class="course-emoji">👩‍💼</span>
+            <div class="course-name">AI e professioni</div>
+            <div class="course-desc">Strumenti di AI per settori professionali specifici.</div>
+          </div>
+          <span class="course-arrow">→</span>
+        </a>
 
-<!-- SEZIONI DETTAGLIO -->
-<section id="circuiti" class="course-detail">
-  <h2>⚡🔌 Tutti i Miei Circuiti</h2>
-  <br>
-  <p>
-  Un laboratorio pratico per entrare nel mondo dei circuiti elettrici ed elettronici in modo semplice e divertente.
-Tra fili, batterie, LED e piccoli componenti, i partecipanti impareranno come funziona un circuito, come si accende una luce e come dare energia alle proprie idee. <br> <br>
+        <a href="#abc-digitale" class="course-card">
+          <div class="course-card-inner">
+            <span class="course-emoji">📘</span>
+            <div class="course-name">ABC del Digitale</div>
+            <div class="course-desc">Competenze base per la vita quotidiana.</div>
+          </div>
+          <span class="course-arrow">→</span>
+        </a>
 
-🔎 Sperimentazione diretta <br>
-💡 Comprensione dei concetti base (corrente, collegamenti, polarità) <br>
-🛠️ Costruzione di piccoli progetti funzionanti <br> <br>
+        <a href="#smartphone-facile" class="course-card">
+          <div class="course-card-inner">
+            <span class="course-emoji">📱</span>
+            <div class="course-name">Smartphone facile e sicuro</div>
+            <div class="course-desc">Comunicare, proteggersi, imparare con il cellulare.</div>
+          </div>
+          <span class="course-arrow">→</span>
+        </a>
 
-Un percorso perfetto per sviluppare logica, manualità e spirito di scoperta.
-  </p>
-</section>
+        <a href="#smartphone-su-misura" class="course-card">
+          <div class="course-card-inner">
+            <span class="course-emoji">⚙️</span>
+            <div class="course-name">Smartphone su misura</div>
+            <div class="course-desc">Regola il tuo cellulare passo per passo.</div>
+          </div>
+          <span class="course-arrow">→</span>
+        </a>
 
-<section id="Cybersecurity" class="course-detail">
-  <h2>💻 Cybersecurity per tutti</h2>
-  <p>
+        <a href="#google-smartphone" class="course-card">
+          <div class="course-card-inner">
+            <span class="course-emoji">🔎</span>
+            <div class="course-name">Google e smartphone</div>
+            <div class="course-desc">Account Google, Gmail, Play Store e sincronizzazione.</div>
+          </div>
+          <span class="course-arrow">→</span>
+        </a>
 
-    <br>
+        <a href="#navigare-online" class="course-card">
+          <div class="course-card-inner">
+            <span class="course-emoji">🛍️</span>
+            <div class="course-name">Navigare e acquistare online</div>
+            <div class="course-desc">Guida pratica per acquisti sicuri in rete.</div>
+          </div>
+          <span class="course-arrow">→</span>
+        </a>
 
-“Proteggi i tuoi dati nella vita di ogni giorno”
+        <a href="#corso-digital" class="course-card">
+          <div class="course-card-inner">
+            <span class="course-emoji">💬</span>
+            <div class="course-name">WhatsApp senza stress</div>
+            <div class="course-desc">Messaggi, chiamate e buone maniere digitali.</div>
+          </div>
+          <span class="course-arrow">→</span>
+        </a>
 
-Un corso per riconoscere le principali minacce online e adottare comportamenti sicuri nella navigazione, negli acquisti e nella comunicazione digitale.
-<br>
-🚨 Riconoscere truffe e phishing<br>
-🔑 Creare password efficaci<br>
-🌐 Navigare in sicurezza<br>
-  </p>
-</section>
+        <a href="#fake-news" class="course-card">
+          <div class="course-card-inner">
+            <span class="course-emoji">📰</span>
+            <div class="course-name">Le Fake News</div>
+            <div class="course-desc">Riconoscerle, combatterle, capirne l'origine.</div>
+          </div>
+          <span class="course-arrow">→</span>
+        </a>
 
-<section id="corso-digital" class="course-detail">
-  <h2>Competenze Digitali</h2>
-  <p>
-    💬📲 WhatsApp senza stress
+        <a href="#project-smart" class="course-card">
+          <div class="course-card-inner">
+            <span class="course-emoji">📋</span>
+            <div class="course-name">Project Smart</div>
+            <div class="course-desc">Organizza progetti e idee con strumenti digitali.</div>
+          </div>
+          <span class="course-arrow">→</span>
+        </a>
 
-“Messaggi, chiamate e buone maniere digitali”
+        <a href="#canva" class="course-card">
+          <div class="course-card-inner">
+            <span class="course-emoji">🎨</span>
+            <div class="course-name">Canva per tutti</div>
+            <div class="course-desc">Grafica facile per comunicare online.</div>
+          </div>
+          <span class="course-arrow">→</span>
+        </a>
 
-Un incontro dedicato a imparare a usare WhatsApp in modo semplice e corretto, evitando errori e confusione nei gruppi.
+        <a href="#microbit" class="course-card">
+          <div class="course-card-inner">
+            <span class="course-emoji">💡</span>
+            <div class="course-name">Micro:bit Makers Lab</div>
+            <div class="course-desc">Programma il tuo primo dispositivo intelligente.</div>
+          </div>
+          <span class="course-arrow">→</span>
+        </a>
 
-📸 Invio di foto e documenti
-👥 Gestione dei gruppi
-🔐 Privacy e sicurezza
-  </p>
-</section>
+        <a href="#corso-digital" class="course-card">
+          <div class="course-card-inner">
+            <span class="course-emoji">🌐</span>
+            <div class="course-name">Competenze Digitali</div>
+            <div class="course-desc">Orientarsi nel mondo digitale con autonomia.</div>
+          </div>
+          <span class="course-arrow">→</span>
+        </a>
 
-<section id="excel" class="course-detail">
-  <h2>📊💻 I nostri corsi Excel</h2>
-  <p>
+      </div>
+    </div>
 
+    <!-- KIDS -->
+    <div class="category-block">
+      <div class="category-header">
+        <div class="category-icon">🧒</div>
+        <h3>Corsi per bambini e ragazzi</h3>
+        <span class="category-count">5 corsi</span>
+      </div>
+      <div class="course-grid">
 
-Un percorso completo, dall’introduzione alle funzioni avanzate
+        <a href="#circuiti" class="course-card">
+          <div class="course-card-inner">
+            <span class="course-emoji">⚡</span>
+            <div class="course-name">Tutti i Miei Circuiti</div>
+            <div class="course-desc">Laboratorio pratico per entrare nel mondo dei circuiti.</div>
+          </div>
+          <span class="course-arrow">→</span>
+        </a>
 
-La nostra offerta formativa su Excel è strutturata come un percorso progressivo, pensato per accompagnare ogni partecipante dal primo approccio al foglio di calcolo fino alle funzionalità più avanzate di analisi e gestione dei dati.
+        <a href="#robotica-lego" class="course-card">
+          <div class="course-card-inner">
+            <span class="course-emoji">🧱</span>
+            <div class="course-name">Robotica con LEGO SPIKE Prime</div>
+            <div class="course-desc">Costruisci, programma e impara con i LEGO.</div>
+          </div>
+          <span class="course-arrow">→</span>
+        </a>
 
-Si parte dai corsi introduttivi – ideali per chi non ha mai utilizzato Excel o desidera consolidare le basi – per imparare a orientarsi nell’interfaccia, inserire dati, organizzare informazioni e utilizzare le prime formule.
+        <a href="#musica-piante" class="course-card">
+          <div class="course-card-inner">
+            <span class="course-emoji">🌿</span>
+            <div class="course-name">La musica delle piante</div>
+            <div class="course-desc">Creazione di un'opera sonora collettiva con sensori.</div>
+          </div>
+          <span class="course-arrow">→</span>
+        </a>
 
-Si prosegue con il livello base, dedicato alle formule fondamentali e ai calcoli automatici, per acquisire sicurezza nelle operazioni quotidiane.
+        <a href="#arduino" class="course-card">
+          <div class="course-card-inner">
+            <span class="course-emoji">🔧</span>
+            <div class="course-name">Scopriamo Arduino</div>
+            <div class="course-desc">Primi passi nella programmazione elettronica.</div>
+          </div>
+          <span class="course-arrow">→</span>
+        </a>
 
-Il livello intermedio permette di fare un salto di qualità, imparando a gestire grandi quantità di dati, utilizzare filtri avanzati e analizzare le informazioni attraverso le tabelle pivot.
+        <a href="#makey-makey" class="course-card">
+          <div class="course-card-inner">
+            <span class="course-emoji">🎹</span>
+            <div class="course-name">Makey Makey</div>
+            <div class="course-desc">Sperimenta l'elettronica giocando con oggetti comuni.</div>
+          </div>
+          <span class="course-arrow">→</span>
+        </a>
 
-Infine, il livello avanzato approfondisce funzioni di ricerca e strumenti evoluti (come CERCA.X e altre funzioni di collegamento tra dati), per lavorare in modo più strutturato ed efficiente anche in ambito professionale.
+      </div>
+    </div>
+  </section>
 
-🎯 Percorso modulare e graduale
-📈 Crescita progressiva delle competenze
-🛠️ Approccio pratico, orientato a casi reali
+  <div class="divider"></div>
 
-Un’offerta pensata per rispondere a esigenze diverse: dalla gestione personale dei dati fino all’utilizzo professionale di Excel.  </p>
-</section>
+  <!-- CALENDARIO -->
+  <section class="section" id="calendario">
+    <div class="section-label">Calendario</div>
+    <h2 class="section-title">Corsi della settimana</h2>
+    <p class="section-subtitle">Aggiornato in tempo reale da Google Sheets.</p>
 
-<section id="abc-digitale" class="course-detail">
-  <h2>📘💻 ABC del Digitale</h2>
-  <p>
-    Competenze base per la vita quotidiana.
-    Un corso introduttivo pensato per acquisire sicurezza nell’uso di computer, internet e strumenti digitali essenziali.
-    🌐 Navigare in sicurezza
-    📧 Usare email e strumenti base
-    🧭 Orientarsi nel mondo digitale con autonomia
-  </p>
-</section>
+    <div class="schedule-wrap">
+      <div class="schedule-toolbar">
+        <input type="text" id="searchInput" class="search-input" placeholder="Cerca per corso, luogo, data…">
+        <button class="refresh-btn" onclick="fetchData()">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M1 7a6 6 0 1 0 1.1-3.5M1 2.5V5h2.5" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Aggiorna
+        </button>
+      </div>
+      <div class="result-count" id="resultCount"></div>
+      <div class="schedule-table-wrap" id="content">
+        <div class="loading-state">
+          <div class="loading-spinner"></div>
+          Caricamento corsi…
+        </div>
+      </div>
+      <div class="last-update" id="lastUpdate"></div>
+    </div>
+  </section>
 
-<section id="capire-ai" class="course-detail">
-  <h2>🤖🧠 Capire l’Intelligenza Artificiale</h2>
-  <p>
-    Cos’è, come funziona, perché ci riguarda.
-    Un incontro divulgativo per comprendere in modo chiaro cosa sia l’AI e come sta trasformando lavoro e vita quotidiana.
-    🔎 Concetti spiegati in modo semplice
-    💼 Impatti concreti su professioni e società
-    ⚖️ Opportunità e limiti
-  </p>
-</section>
+  <div class="divider"></div>
 
-<section id="ai-quotidiana" class="course-detail">
-  <h2>✨🤖 AI per la vita quotidiana</h2>
-  <p>
-    ChatGPT, Copilot e strumenti utili.
-    Un laboratorio pratico per imparare a utilizzare strumenti di intelligenza artificiale nella vita di tutti i giorni.
-    ✍️ Scrivere e rielaborare testi
-    📊 Supporto nello studio e nel lavoro
-    ⚙️ Uso consapevole e strategico
-  </p>
-</section>
+  <!-- DETTAGLI ADULTI -->
+  <section class="section" id="dettagli">
+    <div class="section-label">Schede corso</div>
+    <h2 class="section-title">Tutti i dettagli</h2>
+    <p class="section-subtitle">Clicca su una card qui sopra per navigare direttamente alla sezione.</p>
 
-<section id="ai-professioni" class="course-detail">
-  <h2>👩‍💼🚀 AI e professioni</h2>
-  <p>
-    Strumenti per settori specifici.
-    Un corso dedicato a chi vuole integrare l’AI nel proprio ambito professionale.
-    📂 Applicazioni concrete
-    🛠️ Automazione e ottimizzazione
-    🎯 Casi reali
-  </p>
-</section>
+    <div id="cybersecurity" class="detail-section" style="scroll-margin-top:80px;">
+      <h2>🛡️ Cybersecurity per tutti</h2>
+      <p>
+        <strong>Proteggi i tuoi dati nella vita di ogni giorno.</strong><br><br>
+        Un corso per riconoscere le principali minacce online e adottare comportamenti sicuri
+        nella navigazione, negli acquisti e nella comunicazione digitale.
+      </p>
+      <div class="detail-tags">
+        <span class="tag">🚨 Truffe e phishing</span>
+        <span class="tag">🔑 Password efficaci</span>
+        <span class="tag">🌐 Navigazione sicura</span>
+      </div>
+    </div>
 
-<section id="smartphone-facile" class="course-detail">
-  <h2>📱✨ Smartphone facile e sicuro</h2>
-  <p>
-    Comunicare, proteggersi, imparare.
-    Un percorso pratico per usare lo smartphone con maggiore autonomia e sicurezza.
-    💬 Funzioni essenziali
-    🔐 Privacy e protezione dati
-    📲 App utili
-  </p>
-</section>
+    <div id="excel" class="detail-section" style="scroll-margin-top:80px;">
+      <h2>📊 I nostri corsi Excel</h2>
+      <p>
+        <strong>Un percorso completo, dall'introduzione alle funzioni avanzate.</strong><br><br>
+        La nostra offerta formativa su Excel è strutturata come un percorso progressivo, pensato per accompagnare
+        ogni partecipante dal primo approccio fino alle funzionalità più avanzate di analisi e gestione dei dati.
+        Si parte dai corsi introduttivi per imparare a orientarsi, inserire dati e usare le prime formule; si
+        prosegue con il livello base, poi con quello intermedio (tabelle pivot, filtri avanzati) e infine con il
+        livello avanzato (CERCA.X e funzioni di collegamento tra dati).
+      </p>
+      <div class="detail-tags">
+        <span class="tag">🎯 Percorso modulare</span>
+        <span class="tag">📈 Crescita progressiva</span>
+        <span class="tag">🛠️ Approccio pratico</span>
+      </div>
+    </div>
 
-<section id="smartphone-su-misura" class="course-detail">
-  <h2>⚙️📲 Smartphone su misura</h2>
-  <p>
-    Regolare il tuo cellulare passo per passo.
-    Imparare a personalizzare impostazioni, notifiche e sicurezza.
-    🔧 Configurazioni guidate
-    🔔 Gestione notifiche
-    🛡️ Maggiore controllo
-  </p>
-</section>
+    <div id="corso-ai" class="detail-section" style="scroll-margin-top:80px;">
+      <h2>🤖 Capire l'Intelligenza Artificiale</h2>
+      <p>
+        <strong>Cos'è, come funziona, perché ci riguarda.</strong><br><br>
+        Un incontro divulgativo per comprendere in modo chiaro cosa sia l'AI e come sta trasformando
+        lavoro e vita quotidiana. Concetti spiegati in modo semplice, con focus sugli impatti concreti.
+      </p>
+      <div class="detail-tags">
+        <span class="tag">🔎 Concetti semplici</span>
+        <span class="tag">💼 Impatti concreti</span>
+        <span class="tag">⚖️ Opportunità e limiti</span>
+      </div>
+    </div>
 
-<section id="google-smartphone" class="course-detail">
-  <h2>🔎📱 Google e smartphone</h2>
-  <p>
-    Le basi per gestirlo in tranquillità.
-    Account Google, Gmail, Play Store e sincronizzazione spiegati con chiarezza.
-    ☁️ Gestione account
-    📩 Email e calendario
-    📦 Archiviazione e backup
-  </p>
-</section>
+    <div id="ai-quotidiana" class="detail-section" style="scroll-margin-top:80px;">
+      <h2>✨ AI per la vita quotidiana</h2>
+      <p>
+        <strong>ChatGPT, Copilot e strumenti utili.</strong><br><br>
+        Un laboratorio pratico per imparare a utilizzare strumenti di intelligenza artificiale
+        nella vita di tutti i giorni: scrivere testi, ottenere supporto nello studio e nel lavoro,
+        usarli in modo consapevole e strategico.
+      </p>
+      <div class="detail-tags">
+        <span class="tag">✍️ Scrittura e testi</span>
+        <span class="tag">📊 Studio e lavoro</span>
+        <span class="tag">⚙️ Uso consapevole</span>
+      </div>
+    </div>
 
-<section id="navigare-online" class="course-detail">
-  <h2>🛍️🌐 Navigare e acquistare online in sicurezza</h2>
-  <p>
-    Guida pratica per tutti.
-    Consigli concreti per acquistare online senza rischi.
-    💳 Pagamenti sicuri
-    🚨 Riconoscere truffe
-    📦 Monitorare ordini
-  </p>
-</section>
+    <div id="ai-professioni" class="detail-section" style="scroll-margin-top:80px;">
+      <h2>👩‍💼 AI e professioni</h2>
+      <p>
+        <strong>Strumenti per settori specifici.</strong><br><br>
+        Un corso dedicato a chi vuole integrare l'AI nel proprio ambito professionale.
+        Applicazioni concrete, automazione e ottimizzazione dei flussi di lavoro, casi reali.
+      </p>
+      <div class="detail-tags">
+        <span class="tag">📂 Applicazioni concrete</span>
+        <span class="tag">🛠️ Automazione</span>
+        <span class="tag">🎯 Casi reali</span>
+      </div>
+    </div>
 
-<section id="cybersecurity" class="course-detail">
-  <h2>🛡️💻 Cybersecurity per tutti</h2>
-  <p>
-    Proteggi i tuoi dati ogni giorno.
-    Un corso per riconoscere minacce digitali e adottare comportamenti sicuri.
-    🔑 Password efficaci
-    📧 Phishing e truffe
-    🌐 Navigazione protetta
-  </p>
-</section>
+    <div id="abc-digitale" class="detail-section" style="scroll-margin-top:80px;">
+      <h2>📘 ABC del Digitale</h2>
+      <p>
+        <strong>Competenze base per la vita quotidiana.</strong><br><br>
+        Un corso introduttivo pensato per acquisire sicurezza nell'uso di computer, internet
+        e strumenti digitali essenziali. Navigare in sicurezza, usare email e orientarsi
+        nel mondo digitale con autonomia.
+      </p>
+      <div class="detail-tags">
+        <span class="tag">🌐 Navigazione sicura</span>
+        <span class="tag">📧 Email e strumenti base</span>
+        <span class="tag">🧭 Autonomia digitale</span>
+      </div>
+    </div>
 
-<section id="fake-news" class="course-detail">
-  <h2>📰🔍 Le Fake News</h2>
-  <p>
-    Come si originano, come identificarle e combatterle.
-    Strumenti concreti per riconoscere notizie false e disinformazione.
-    🔎 Verifica delle fonti
-    📲 Social e viralità
-    🧠 Pensiero critico
-  </p>
-</section>
+    <div id="smartphone-facile" class="detail-section" style="scroll-margin-top:80px;">
+      <h2>📱 Smartphone facile e sicuro</h2>
+      <p>
+        <strong>Comunicare, proteggersi, imparare.</strong><br><br>
+        Un percorso pratico per usare lo smartphone con maggiore autonomia e sicurezza.
+        Funzioni essenziali, privacy, protezione dati e app utili spiegati passo per passo.
+      </p>
+      <div class="detail-tags">
+        <span class="tag">💬 Funzioni essenziali</span>
+        <span class="tag">🔐 Privacy e dati</span>
+        <span class="tag">📲 App utili</span>
+      </div>
+    </div>
 
-<section id="project-smart" class="course-detail">
-  <h2>📋🚀 Project Smart</h2>
-  <p>
-    Organizzare progetti e idee con strumenti digitali.
-    Strumenti pratici per pianificare attività e collaborare online.
-    🗓️ Pianificazione efficace
-    📂 Condivisione
-    🎯 Obiettivi chiari
-  </p>
-</section>
+    <div id="smartphone-su-misura" class="detail-section" style="scroll-margin-top:80px;">
+      <h2>⚙️ Smartphone su misura</h2>
+      <p>
+        <strong>Regola il tuo cellulare passo per passo.</strong><br><br>
+        Imparare a personalizzare impostazioni, notifiche e sicurezza.
+        Configurazioni guidate per avere maggiore controllo del proprio dispositivo.
+      </p>
+      <div class="detail-tags">
+        <span class="tag">🔧 Configurazioni guidate</span>
+        <span class="tag">🔔 Notifiche</span>
+        <span class="tag">🛡️ Controllo totale</span>
+      </div>
+    </div>
 
-<section id="canva" class="course-detail">
-  <h2>📸🎨 Canva per tutti</h2>
-  <p>
-    Grafica facile per comunicare online.
-    Creare grafiche, locandine e contenuti social in modo semplice.
-    🖼️ Template pronti
-    ✏️ Personalizzazione creativa
-    📲 Condivisione immediata
-  </p>
-</section>
+    <div id="google-smartphone" class="detail-section" style="scroll-margin-top:80px;">
+      <h2>🔎 Google e smartphone</h2>
+      <p>
+        <strong>Le basi per gestirlo in tranquillità.</strong><br><br>
+        Account Google, Gmail, Play Store e sincronizzazione spiegati con chiarezza.
+        Gestione account, email, calendario, archiviazione e backup.
+      </p>
+      <div class="detail-tags">
+        <span class="tag">☁️ Gestione account</span>
+        <span class="tag">📩 Email e calendario</span>
+        <span class="tag">📦 Backup e archiviazione</span>
+      </div>
+    </div>
 
-<section id="robotica-lego" class="course-detail">
-  <h2>🤖🧱 Robotica con LEGO SPIKE Prime</h2>
-  <p>
-    Costruisci, programma, impara.
-    Laboratorio di robotica educativa per costruire e programmare robot.
-    ⚙️ Costruzione meccanica
-    💻 Programmazione
-    🏁 Sfide creative
-  </p>
-</section>
+    <div id="navigare-online" class="detail-section" style="scroll-margin-top:80px;">
+      <h2>🛍️ Navigare e acquistare online in sicurezza</h2>
+      <p>
+        <strong>Guida pratica per tutti.</strong><br><br>
+        Consigli concreti per acquistare online senza rischi.
+        Pagamenti sicuri, riconoscere truffe, monitorare ordini.
+      </p>
+      <div class="detail-tags">
+        <span class="tag">💳 Pagamenti sicuri</span>
+        <span class="tag">🚨 Riconoscere truffe</span>
+        <span class="tag">📦 Monitoraggio ordini</span>
+      </div>
+    </div>
 
-<section id="makey-makey" class="course-detail">
-  <h2>🎹🔌 Makey Makey</h2>
-  <p>
-    Sperimenta l’elettronica giocando.
-    Trasforma oggetti comuni in strumenti interattivi.
-    ⚡ Conducibilità
-    🎮 Giochi e musica
-    🧠 Creatività tecnologica
-  </p>
-</section>
+    <div id="corso-digital" class="detail-section" style="scroll-margin-top:80px;">
+      <h2>💬 WhatsApp senza stress</h2>
+      <p>
+        <strong>Messaggi, chiamate e buone maniere digitali.</strong><br><br>
+        Un incontro dedicato a imparare a usare WhatsApp in modo semplice e corretto,
+        evitando errori e confusione nei gruppi. Invio di foto, gestione dei gruppi, privacy e sicurezza.
+      </p>
+      <div class="detail-tags">
+        <span class="tag">📸 Foto e documenti</span>
+        <span class="tag">👥 Gestione gruppi</span>
+        <span class="tag">🔐 Privacy</span>
+      </div>
+    </div>
 
-<section id="microbit" class="course-detail">
-  <h2>🤖💡 Micro:bit Makers Lab</h2>
-  <p>
-    Programma il tuo primo dispositivo intelligente.
-    Coding ed elettronica con sensori e LED.
-    💻 Programmazione visuale
-    🔁 Esperimenti interattivi
-    🚀 Creatività digitale
-  </p>
-</section>
+    <div id="fake-news" class="detail-section" style="scroll-margin-top:80px;">
+      <h2>📰 Le Fake News</h2>
+      <p>
+        <strong>Come si originano, come identificarle e combatterle.</strong><br><br>
+        Strumenti concreti per riconoscere notizie false e disinformazione.
+        Verifica delle fonti, dinamiche dei social e pensiero critico.
+      </p>
+      <div class="detail-tags">
+        <span class="tag">🔎 Verifica fonti</span>
+        <span class="tag">📲 Social e viralità</span>
+        <span class="tag">🧠 Pensiero critico</span>
+      </div>
+    </div>
 
-<section id="arduino" class="course-detail">
-  <h2>🔧🤖 Scopriamo Arduino</h2>
-  <p>
-    Primi passi nella programmazione elettronica.
-    Introduzione alla piattaforma Arduino e ai suoi utilizzi.
-    ⚡ Circuiti e sensori
-    💻 Programmazione base
-    🛠️ Prototipi creativi
-  </p>
-</section>
+    <div id="project-smart" class="detail-section" style="scroll-margin-top:80px;">
+      <h2>📋 Project Smart</h2>
+      <p>
+        <strong>Organizzare progetti e idee con strumenti digitali.</strong><br><br>
+        Strumenti pratici per pianificare attività e collaborare online.
+        Pianificazione efficace, condivisione e obiettivi chiari.
+      </p>
+      <div class="detail-tags">
+        <span class="tag">🗓️ Pianificazione</span>
+        <span class="tag">📂 Condivisione</span>
+        <span class="tag">🎯 Obiettivi</span>
+      </div>
+    </div>
 
-<section id="musica-piante" class="course-detail">
-  <h2>🌿🎶 La musica delle piante</h2>
-  <p>
-    Creazione di un’opera sonora collettiva.
-    Un laboratorio che unisce natura, tecnologia e suono.
-    🌱 Sensori e segnali naturali
-    🎼 Composizione condivisa
-    🎧 Esperienza immersiva
-  </p>
-</section>
+    <div id="canva" class="detail-section" style="scroll-margin-top:80px;">
+      <h2>🎨 Canva per tutti</h2>
+      <p>
+        <strong>Grafica facile per comunicare online.</strong><br><br>
+        Creare grafiche, locandine e contenuti social in modo semplice.
+        Template pronti, personalizzazione creativa e condivisione immediata.
+      </p>
+      <div class="detail-tags">
+        <span class="tag">🖼️ Template pronti</span>
+        <span class="tag">✏️ Creatività</span>
+        <span class="tag">📲 Condivisione</span>
+      </div>
+    </div>
 
-<section id="lorem" class="course-detail">
-  <h2>ipsum</h2>
-  <p>
-    mensat lorem 
-  </p>
-</section>
+    <div id="microbit" class="detail-section" style="scroll-margin-top:80px;">
+      <h2>💡 Micro:bit Makers Lab</h2>
+      <p>
+        <strong>Programma il tuo primo dispositivo intelligente.</strong><br><br>
+        Coding ed elettronica con sensori e LED. Programmazione visuale,
+        esperimenti interattivi e creatività digitale.
+      </p>
+      <div class="detail-tags">
+        <span class="tag">💻 Programmazione visuale</span>
+        <span class="tag">🔁 Esperimenti</span>
+        <span class="tag">🚀 Creatività digitale</span>
+      </div>
+    </div>
 
-<section class="cta">
-  <h2>Resta aggiornato</h2>
-  <p>Iscriviti per ricevere informazioni sui prossimi corsi.</p>
-  <div class="subscription-options">
-    <a href="#">Canale WhatsApp</a>
-    <a href="#">Newsletter</a>
-  </div>
-</section>
+    <!-- KIDS DETAILS -->
+    <div id="circuiti" class="detail-section" style="scroll-margin-top:80px;">
+      <h2>⚡ Tutti i Miei Circuiti</h2>
+      <p>
+        <strong>Un laboratorio pratico per entrare nel mondo dei circuiti elettrici ed elettronici.</strong><br><br>
+        Tra fili, batterie, LED e piccoli componenti, i partecipanti impareranno come funziona un circuito,
+        come si accende una luce e come dare energia alle proprie idee. Sperimentazione diretta,
+        comprensione dei concetti base (corrente, collegamenti, polarità) e costruzione di piccoli progetti funzionanti.
+        Un percorso perfetto per sviluppare logica, manualità e spirito di scoperta.
+      </p>
+      <div class="detail-tags">
+        <span class="tag">🔎 Sperimentazione</span>
+        <span class="tag">💡 Corrente e polarità</span>
+        <span class="tag">🛠️ Progetti funzionanti</span>
+      </div>
+    </div>
 
-<section class="contacts">
-  <h2>Contatti</h2>
-  <ul>
-    <li>Email: <strong>info@techstationets.it</strong></li>
-  </ul>
-</section>
+    <div id="robotica-lego" class="detail-section" style="scroll-margin-top:80px;">
+      <h2>🧱 Robotica con LEGO SPIKE Prime</h2>
+      <p>
+        <strong>Costruisci, programma, impara.</strong><br><br>
+        Laboratorio di robotica educativa per costruire e programmare robot.
+        Costruzione meccanica, programmazione e sfide creative per imparare
+        i principi dell'ingegneria giocando.
+      </p>
+      <div class="detail-tags">
+        <span class="tag">⚙️ Costruzione meccanica</span>
+        <span class="tag">💻 Programmazione</span>
+        <span class="tag">🏁 Sfide creative</span>
+      </div>
+    </div>
+
+    <div id="musica-piante" class="detail-section" style="scroll-margin-top:80px;">
+      <h2>🌿 La musica delle piante</h2>
+      <p>
+        <strong>Creazione di un'opera sonora collettiva.</strong><br><br>
+        Un laboratorio che unisce natura, tecnologia e suono.
+        Sensori e segnali naturali, composizione condivisa ed esperienza immersiva
+        per scoprire che la tecnologia è ovunque, anche nel mondo naturale.
+      </p>
+      <div class="detail-tags">
+        <span class="tag">🌱 Sensori naturali</span>
+        <span class="tag">🎼 Composizione condivisa</span>
+        <span class="tag">🎧 Esperienza immersiva</span>
+      </div>
+    </div>
+
+    <div id="arduino" class="detail-section" style="scroll-margin-top:80px;">
+      <h2>🔧 Scopriamo Arduino</h2>
+      <p>
+        <strong>Primi passi nella programmazione elettronica.</strong><br><br>
+        Introduzione alla piattaforma Arduino e ai suoi utilizzi.
+        Circuiti, sensori, programmazione base e costruzione di prototipi creativi.
+      </p>
+      <div class="detail-tags">
+        <span class="tag">⚡ Circuiti e sensori</span>
+        <span class="tag">💻 Programmazione base</span>
+        <span class="tag">🛠️ Prototipi creativi</span>
+      </div>
+    </div>
+
+    <div id="makey-makey" class="detail-section" style="scroll-margin-top:80px;">
+      <h2>🎹 Makey Makey</h2>
+      <p>
+        <strong>Sperimenta l'elettronica giocando.</strong><br><br>
+        Trasforma oggetti comuni in strumenti interattivi.
+        Conducibilità, giochi, musica e creatività tecnologica: scopri che qualsiasi cosa
+        può diventare un controller.
+      </p>
+      <div class="detail-tags">
+        <span class="tag">⚡ Conducibilità</span>
+        <span class="tag">🎮 Giochi e musica</span>
+        <span class="tag">🧠 Creatività tecnologica</span>
+      </div>
+    </div>
+
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CTA -->
+  <section class="section">
+    <div class="cta-section">
+      <div class="section-label">Resta aggiornato</div>
+      <h2 class="section-title" style="margin-bottom:12px;">Non perdere i prossimi corsi</h2>
+      <p>Iscriviti al nostro canale WhatsApp o alla newsletter per ricevere tutte le novità.</p>
+      <div class="cta-btns">
+        <a href="#" class="cta-btn cta-btn-primary">💬 Canale WhatsApp</a>
+        <a href="#" class="cta-btn cta-btn-ghost">📧 Newsletter</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATTI -->
+  <section class="section" id="contatti">
+    <div class="contacts-section">
+      <div>
+        <h2>Contatti</h2>
+        <p style="color:var(--text-muted); margin-top:4px;">Hai domande? Scrivici.</p>
+      </div>
+      <a href="mailto:info@techstationets.it" class="contact-email">info@techstationets.it</a>
+    </div>
+  </section>
 
 </main>
 
 <footer>
-© Techstation ETS – Corsi gratuiti per tutti
+  © Techstation ETS – Corsi gratuiti per tutti
 </footer>
 
+<script>
+const API_URL = 'https://script.google.com/macros/s/AKfycbwp2gclUaxy7XMocDWCJzTSHb3NGiqJeA01-ZryoRZNLQNqtwNSNFgC58dZhWL0e0rWzw/exec';
+let allData = [], headers = [];
 
-   
-</body>
-  <script>   
-        // ============================================
-        // CONFIGURAZIONE - MODIFICA QUI IL TUO URL
-        // ============================================
-        const API_URL = 'https://script.google.com/macros/s/AKfycbwp2gclUaxy7XMocDWCJzTSHb3NGiqJeA01-ZryoRZNLQNqtwNSNFgC58dZhWL0e0rWzw/exec';
+async function fetchData() {
+  const contentDiv = document.getElementById('content');
+  contentDiv.innerHTML = '<div class="loading-state"><div class="loading-spinner"></div>Caricamento corsi…</div>';
+  document.getElementById('resultCount').textContent = '';
 
-        let allData = [];
-        let headers = [];
-
-        // ============================================
-        // FUNZIONE PRINCIPALE
-        // ============================================
-        async function fetchData() {
-            const contentDiv = document.getElementById('content');
-            contentDiv.innerHTML = '<div class="loading">Caricamento dati...</div>';
-
-            try {
-                const response = await fetch(API_URL);
-                
-                if (!response.ok) {
-                    throw new Error('Errore HTTP: ' + response.status);
-                }
-
-                const data = await response.json();
-                
-                if (data.error) {
-                    throw new Error(data.error);
-                }
-
-                headers = data.headers;
-                allData = data.rows;
-
-                displayData(headers, allData);
-                document.getElementById('lastUpdate').textContent = 
-                    'Ultimo aggiornamento: ' + data.lastUpdate;
-                
-            } catch (error) {
-                console.error('Errore:', error);
-                contentDiv.innerHTML = `
-                    <div class="error">
-                        <strong>❌ Errore</strong><br>
-                        ${error.message}
-                    </div>
-                `;
-            }
-        }
-
-        // ============================================
-        // MOSTRA DATI - Gestisce link e testo
-        // ============================================
-        function displayData(headers, rows) {
-    const contentDiv = document.getElementById('content');
-    
-    if (rows.length === 0) {
-        contentDiv.innerHTML = '<div class="no-results">Nessun dato trovato</div>';
-        return;
-    }
-
-    let html = '<table><thead><tr>';
-    headers.forEach(header => {
-        html += `<th>${escapeHtml(header)}</th>`;
-    });
-    html += '</tr></thead><tbody>';
-
-    rows.forEach(row => {
-        html += '<tr>';
-        headers.forEach(header => {
-            const cell = row[header];
-            
-            // Se è un'immagine
-            if (cell && typeof cell === 'object' && cell.type === 'image') {
-                html += `<td><img src="${cell.url}" alt="Immagine" style="max-width: 150px; max-height: 100px; border-radius: 5px; object-fit: cover;"></td>`;
-            }
-            // Se è un link
-            else if (cell && typeof cell === 'object' && cell.type === 'link') {
-                html += `<td><a href="${cell.url}" target="_blank">${escapeHtml(cell.text)}</a></td>`;
-            }
-            // Se è una stringa URL
-            else if (typeof cell === 'string' && cell.match(/^https?:\/\//)) {
-                // Controlla se è un'immagine per estensione
-                if (cell.match(/\.(jpg|jpeg|png|gif|webp|svg)$/i)) {
-                    html += `<td><img src="${cell}" alt="Immagine" style="max-width: 150px; max-height: 100px; border-radius: 5px; object-fit: cover;"></td>`;
-                } else {
-                    html += `<td><a href="${cell}" target="_blank">${escapeHtml(cell)}</a></td>`;
-                }
-            }
-            // Testo normale
-            else {
-                html += `<td>${escapeHtml(cell !== null && cell !== undefined ? cell : '')}</td>`;
-            }
-        });
-        html += '</tr>';
-    });
-
-    html += '</tbody></table>';
-    contentDiv.innerHTML = html;
+  try {
+    const response = await fetch(API_URL);
+    if (!response.ok) throw new Error('Errore HTTP: ' + response.status);
+    const data = await response.json();
+    if (data.error) throw new Error(data.error);
+    headers = data.headers;
+    allData = data.rows;
+    displayData(headers, allData);
+    document.getElementById('lastUpdate').textContent = 'Aggiornato: ' + data.lastUpdate;
+  } catch (error) {
+    contentDiv.innerHTML = `<div class="loading-state" style="color:#f87171;">❌ ${error.message}</div>`;
+  }
 }
-        // ============================================
-        // UTILITY
-        // ============================================
-        function escapeHtml(text) {
-            if (text === null || text === undefined) return '';
-            const div = document.createElement('div');
-            div.textContent = String(text);
-            return div.innerHTML;
+
+function displayData(headers, rows) {
+  const contentDiv = document.getElementById('content');
+  const countDiv = document.getElementById('resultCount');
+
+  if (rows.length === 0) {
+    contentDiv.innerHTML = '<div class="empty-state">Nessun corso trovato.</div>';
+    countDiv.textContent = '';
+    return;
+  }
+
+  countDiv.textContent = rows.length + ' corso' + (rows.length !== 1 ? 'i' : '') + ' trovato' + (rows.length !== 1 ? 'i' : '');
+
+  let html = '<table><thead><tr>';
+  headers.forEach(h => { html += `<th>${escapeHtml(h)}</th>`; });
+  html += '</tr></thead><tbody>';
+
+  rows.forEach(row => {
+    html += '<tr>';
+    headers.forEach(h => {
+      const cell = row[h];
+      if (cell && typeof cell === 'object' && cell.type === 'image') {
+        html += `<td><img src="${cell.url}" alt="" style="max-width:120px;max-height:80px;border-radius:6px;object-fit:cover;"></td>`;
+      } else if (cell && typeof cell === 'object' && cell.type === 'link') {
+        html += `<td><a href="${cell.url}" target="_blank">${escapeHtml(cell.text)}</a></td>`;
+      } else if (typeof cell === 'string' && cell.match(/^https?:\/\//)) {
+        if (cell.match(/\.(jpg|jpeg|png|gif|webp|svg)$/i)) {
+          html += `<td><img src="${cell}" alt="" style="max-width:120px;max-height:80px;border-radius:6px;object-fit:cover;"></td>`;
+        } else {
+          html += `<td><a href="${cell}" target="_blank">${escapeHtml(cell)}</a></td>`;
         }
+      } else {
+        html += `<td>${escapeHtml(cell !== null && cell !== undefined ? cell : '')}</td>`;
+      }
+    });
+    html += '</tr>';
+  });
 
-        // ============================================
-        // RICERCA
-        // ============================================
-        document.getElementById('searchInput').addEventListener('input', function(e) {
-            const searchTerm = e.target.value.toLowerCase().trim();
-            
-            if (searchTerm === '') {
-                displayData(headers, allData);
-                return;
-            }
+  html += '</tbody></table>';
+  contentDiv.innerHTML = html;
+}
 
-            const filtered = allData.filter(row => {
-                return Object.values(row).some(value => {
-                    // Cerca sia nel testo che nell'URL se è un link
-                    if (value && typeof value === 'object' && value.type === 'link') {
-                        return value.text.toLowerCase().includes(searchTerm) || 
-                               value.url.toLowerCase().includes(searchTerm);
-                    }
-                    return String(value).toLowerCase().includes(searchTerm);
-                });
-            });
+function escapeHtml(text) {
+  if (text === null || text === undefined) return '';
+  const d = document.createElement('div');
+  d.textContent = String(text);
+  return d.innerHTML;
+}
 
-            displayData(headers, filtered);
-        });
+document.getElementById('searchInput').addEventListener('input', function(e) {
+  const term = e.target.value.toLowerCase().trim();
+  if (!term) { displayData(headers, allData); return; }
+  const filtered = allData.filter(row =>
+    Object.values(row).some(v => {
+      if (v && typeof v === 'object' && v.type === 'link')
+        return v.text.toLowerCase().includes(term) || v.url.toLowerCase().includes(term);
+      return String(v).toLowerCase().includes(term);
+    })
+  );
+  displayData(headers, filtered);
+});
 
-        // ============================================
-        // AVVIO
-        // ============================================
-        fetchData();
-
- </script>
+fetchData();
+</script>
+</body>
 </html>
-
-
-
-
