@@ -27,21 +27,24 @@
 }
 
 [data-theme="light"] {
-  --bg: #ffffff;
-  --surface: #f8f9fa;
-  --surface2: #e9ecef;
+  --bg: linear-gradient(180deg, rgba(251,202,255,0.8281906512605042) 0%, rgba(59,207,239,0.8477984943977591) 54%, rgba(100,89,167,0.8337928921568627) 92%);
+  --surface: #c5def7;
+  --surface2: #8badcf;
   --border: rgba(0,0,0,0.1);
   --text: #212529;
-  --text-muted: #6c757d;
+  --text-muted: #1c1f22;
   --white: #ffffff;
   --shadow: 0 8px 32px rgba(0,0,0,0.1);
   --shadow-glow: 0 0 40px rgba(91,94,244,0.2);
+  
 }
 
 [data-theme="light"] nav {
   background: rgba(248,249,250,0.95);
   border-bottom: 1px solid var(--border);
 }
+
+
 
 [data-theme="light"] .nav-logo {
   background: linear-gradient(135deg, #212529 30%, #5b5ef4 100%);
@@ -455,7 +458,7 @@ body::before {
 .search-input {
   flex: 1;
   min-width: 200px;
-  background: var(--bg);
+  background: white;
   border: 1px solid var(--border);
   color: var(--text);
   padding: 10px 18px;
@@ -951,7 +954,7 @@ nav {
         <input type="text" id="searchInput" class="search-input" placeholder="Cerca per corso, luogo, data…">
         <button class="refresh-btn" onclick="fetchData()">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-            <path d="M1 7a6 6 0 1 0 1.1-3.5M1 2.5V5h2.5" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M1 7a6 6 0 1 0 1.1-3.5M1 2.5V5h2.5" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
           Aggiorna
         </button>
@@ -1017,7 +1020,7 @@ nav {
       <div class="category-header">
         <div class="category-icon">👩‍💻</div>
         <h3>Corsi per adulti</h3>
-        <span class="category-count">16 corsi</span>
+        <span class="category-count">12 corsi</span>
       </div>
       <div class="course-grid">
 
@@ -1206,25 +1209,6 @@ nav {
           </div>
         </details>
 
-        <details class="course-card accordion">
-          <summary class="course-card-inner">
-            <span class="course-emoji">🛍️</span>
-            <div class="course-name">Navigare e acquistare online</div>
-            <div class="course-desc">Guida pratica per acquisti sicuri in rete.</div>
-          </summary>
-          <div class="accordion-content">
-            <p>
-              <strong>Guida pratica per tutti.</strong><br><br>
-              Consigli concreti per acquistare online senza rischi.
-              Pagamenti sicuri, riconoscere truffe, monitorare ordini.
-            </p>
-            <div class="detail-tags">
-              <span class="tag">💳 Pagamenti sicuri</span>
-              <span class="tag">🚨 Riconoscere truffe</span>
-              <span class="tag">📦 Monitoraggio ordini</span>
-            </div>
-          </div>
-        </details>
 
         <details class="course-card accordion">
           <summary class="course-card-inner">
@@ -1245,7 +1229,7 @@ nav {
             </div>
           </div>
         </details>
-
+<!-- 
         <details class="course-card accordion">
           <summary class="course-card-inner">
             <span class="course-emoji">📰</span>
@@ -1265,7 +1249,7 @@ nav {
             </div>
           </div>
         </details>
-
+-->
         <details class="course-card accordion">
           <summary class="course-card-inner">
             <span class="course-emoji">📋</span>
@@ -1306,32 +1290,8 @@ nav {
           </div>
         </details>
 
-        <details class="course-card accordion">
-          <summary class="course-card-inner">
-            <span class="course-emoji">💡</span>
-            <div class="course-name">Micro:bit Makers Lab</div>
-            <div class="course-desc">Programma il tuo primo dispositivo intelligente.</div>
-          </summary>
-          <div class="accordion-content">
-            <p>
-              <strong>Programma il tuo primo dispositivo intelligente.</strong><br><br>
-              Coding ed elettronica con sensori e LED. Programmazione visuale,
-              esperimenti interattivi e creatività digitale.
-            </p>
-            <div class="detail-tags">
-              <span class="tag">💻 Programmazione visuale</span>
-              <span class="tag">🔁 Esperimenti</span>
-              <span class="tag">🚀 Creatività digitale</span>
-            </div>
-          </div>
-        </details>
+      
 
-        <a href="#corso-digital" class="course-card">
-          <div class="course-card-inner">
-            <span class="course-emoji">🌐</span>
-            <div class="course-name">Competenze Digitali</div>
-            <div class="course-desc">Orientarsi nel mondo digitale con autonomia.</div>
-          </div>
           <span class="course-arrow">→</span>
         </a>
 
@@ -1368,6 +1328,28 @@ nav {
             </div>
           </div>
         </details>
+
+
+  <details class="course-card accordion">
+          <summary class="course-card-inner">
+            <span class="course-emoji">💡</span>
+            <div class="course-name">Micro:bit Makers Lab</div>
+            <div class="course-desc">Programma il tuo primo dispositivo intelligente.</div>
+          </summary>
+          <div class="accordion-content">
+            <p>
+              <strong>Programma il tuo primo dispositivo intelligente.</strong><br><br>
+              Coding ed elettronica con sensori e LED. Programmazione visuale,
+              esperimenti interattivi e creatività digitale.
+            </p>
+            <div class="detail-tags">
+              <span class="tag">💻 Programmazione visuale</span>
+              <span class="tag">🔁 Esperimenti</span>
+              <span class="tag">🚀 Creatività digitale</span>
+            </div>
+          </div>
+        </details>
+
 
         <details class="course-card accordion">
           <summary class="course-card-inner">
@@ -1458,36 +1440,6 @@ nav {
 
   <div class="divider"></div>
 
-  
-  <!-- DETTAGLI ADULTI 
-  <section class="section" id="dettagli">
-    <div class="section-label">Schede corso</div>
-    <h2 class="section-title">Tutti i dettagli</h2>
-    <p class="section-subtitle">Espandi le card per vedere tutti i dettagli dei corsi.</p>
-
-    <div id="corso-digital" class="detail-section" style="scroll-margin-top:80px;">
-      <h2>💬 WhatsApp senza stress</h2>
-      <p>
-        <strong>Messaggi, chiamate e buone maniere digitali.</strong><br><br>
-        Un incontro dedicato a imparare a usare WhatsApp in modo semplice e corretto,
-        evitando errori e confusione nei gruppi. Invio di foto, gestione dei gruppi, privacy e sicurezza.
-      </p>
-      <div class="detail-tags">
-        <span class="tag">📸 Foto e documenti</span>
-        <span class="tag">👥 Gestione gruppi</span>
-        <span class="tag">🔐 Privacy</span>
-      </div>
-    </div>
-
-     
-  </section>
-
-
-  <div class="divider"></div>
-
-   blanker -->
-
-
 
   <!-- CONTATTI -->
   <section class="section" id="contatti">
@@ -1570,7 +1522,7 @@ function displayData(headers, rows) {
     return;
   }
 
-  countDiv.textContent = rows.length + ' corso' + (rows.length !== 1 ? 'i' : '') + ' trovato' + (rows.length !== 1 ? 'i' : '');
+  countDiv.textContent = rows.length + ' cors' + (rows.length !== 1 ? 'i' : 'o') + ' trovat' + (rows.length !== 1 ? 'i' : 'o');
 
   let html = '<table><thead><tr>';
   headers.forEach(h => { html += `<th>${escapeHtml(h)}</th>`; });
