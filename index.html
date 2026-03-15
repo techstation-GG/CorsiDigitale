@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -22,6 +24,41 @@
   --radius-sm: 10px;
   --shadow: 0 8px 32px rgba(0,0,0,0.4);
   --shadow-glow: 0 0 40px rgba(91,94,244,0.2);
+}
+
+[data-theme="light"] {
+  --bg: #ffffff;
+  --surface: #f8f9fa;
+  --surface2: #e9ecef;
+  --border: rgba(0,0,0,0.1);
+  --text: #212529;
+  --text-muted: #6c757d;
+  --white: #ffffff;
+  --shadow: 0 8px 32px rgba(0,0,0,0.1);
+  --shadow-glow: 0 0 40px rgba(91,94,244,0.2);
+}
+
+[data-theme="light"] nav {
+  background: rgba(248,249,250,0.95);
+  border-bottom: 1px solid var(--border);
+}
+
+[data-theme="light"] .nav-logo {
+  background: linear-gradient(135deg, #212529 30%, #5b5ef4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+[data-theme="light"] body::before {
+  opacity: 0.01;
+}
+
+[data-theme="light"] .hero h1 {
+  background: linear-gradient(135deg, #212529 30%, #5b5ef4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -732,6 +769,112 @@ nav {
 .delay-1 { animation-delay: 0.1s; }
 .delay-2 { animation-delay: 0.2s; }
 .delay-3 { animation-delay: 0.3s; }
+
+/* ── ACCORDION DROPDOWN ── */
+
+.accordion{
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  margin-bottom:40px;
+  overflow:hidden;
+}
+
+.accordion summary{
+  list-style:none;
+  cursor:pointer;
+  padding:18px 0;
+}
+
+.accordion summary::-webkit-details-marker{
+  display:none;
+}
+
+.accordion summary::after{
+  content:"▾";
+  float:right;
+  opacity:0.6;
+  transition:transform .2s ease;
+}
+
+.accordion[open] summary::after{
+  transform:rotate(180deg);
+}
+
+.accordion-content{
+  padding-top:20px;
+}
+
+/* Theme Toggle */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 101;
+}
+
+#theme-switch {
+  display: none;
+}
+
+.toggle-slider {
+  display: block;
+  width: 60px;
+  height: 30px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.toggle-slider::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 24px;
+  height: 24px;
+  background: var(--grad);
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+
+#theme-switch:checked + .toggle-slider {
+  background: var(--surface2);
+}
+
+#theme-switch:checked + .toggle-slider::before {
+  transform: translateX(30px);
+}
+
+/* Nav Theme Button */
+.theme-btn {
+  background: var(--grad);
+  color: white;
+  border: none;
+  width: 50px;
+  height: 40px;
+  border-radius: 20px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: 20px;
+}
+
+.theme-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(91,94,244,0.4);
+}
+
+.theme-btn:active {
+  transform: scale(0.95);
+}
+
 </style>
 </head>
 <body>
@@ -740,11 +883,12 @@ nav {
 <nav>
   <div class="nav-inner">
     <a href="#" class="nav-logo">Techstation ETS</a>
+    <button id="theme-toggle-btn" class="theme-btn">🌙</button>
     <ul class="nav-links">
       <li><a href="#corsi">Corsi</a></li>
       <li><a href="#calendario">Calendario</a></li>
       <li><a href="#contatti">Contatti</a></li>
-      <li><a href="https://forms.gle/VgzNf1pvcoRobGrq6" class="nav-iscriviti">Iscriviti</a></li>
+      <li><a href="#subscribe" class="nav-iscriviti">Iscriviti</a></li>
     </ul>
   </div>
 </nav>
@@ -767,6 +911,7 @@ nav {
           <path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </a>
+      
       <a href="#calendario" class="hero-cta-secondary">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
           <rect x="2" y="3" width="12" height="11" rx="2" stroke="currentColor" stroke-width="1.6"/>
@@ -774,7 +919,7 @@ nav {
         </svg>
         Calendario
       </a>
-      <a href="https://forms.gle/VgzNf1pvcoRobGrq6" class="hero-cta-ghost">
+      <a href="#subscribe" class="hero-cta-ghost">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
           <path d="M8 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6zM2 14c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
         </svg>
@@ -830,13 +975,17 @@ nav {
 
   <div class="divider"></div>
 
-
-
-
-
-
-
-
+    <!-- CTA e iscrizioni  -->
+  <section class="section" id="subscribe">
+    <div class="cta-section">
+      <div class="section-label">Seleziona la fascia di età</div>
+      <h2 class="section-title" style="margin-bottom:12px;">Iscriviti ai nostri corsi</h2>
+      <div class="cta-btns" >
+        <a href="#" class="cta-btn cta-btn-primary">💬 Adulti </a>
+        <a href="#" class="cta-btn cta-btn-primary">📧 Ragazzi </a>        
+      </div>
+           </div>
+  </section>
 
   
   <!-- CHI SIAMO -->
@@ -872,140 +1021,310 @@ nav {
       </div>
       <div class="course-grid">
 
-        <a href="#cybersecurity" class="course-card">
-          <div class="course-card-inner">
+        <details class="course-card accordion">
+          <summary class="course-card-inner">
             <span class="course-emoji">🛡️</span>
             <div class="course-name">Cybersecurity per tutti</div>
             <div class="course-desc">Proteggi i tuoi dati nella vita di ogni giorno.</div>
+          </summary>
+          <div class="accordion-content">
+            <p>
+              <strong>Proteggi i tuoi dati nella vita di ogni giorno.</strong><br><br>
+              Un corso per riconoscere le principali minacce online e adottare comportamenti sicuri
+              nella navigazione, negli acquisti e nella comunicazione digitale.
+            </p>
+            <div class="detail-tags">
+              <span class="tag">🚨 Truffe e phishing</span>
+              <span class="tag">🔑 Password efficaci</span>
+              <span class="tag">🌐 Navigazione sicura</span>
+            </div>
           </div>
-          <span class="course-arrow">→</span>
-        </a>
+        </details>
 
-        <a href="#excel" class="course-card">
-          <div class="course-card-inner">
+        <details class="course-card accordion">
+          <summary class="course-card-inner">
             <span class="course-emoji">📊</span>
             <div class="course-name">I nostri corsi Excel</div>
             <div class="course-desc">Dal livello base al livello avanzato, percorso modulare.</div>
+          </summary>
+          <div class="accordion-content">
+            <p>
+              <strong>Un percorso completo, dall'introduzione alle funzioni avanzate.</strong><br><br>
+              La nostra offerta formativa su Excel è strutturata come un percorso progressivo, pensato per accompagnare
+              ogni partecipante dal primo approccio fino alle funzionalità più avanzate di analisi e gestione dei dati.
+              Si parte dai corsi introduttivi per imparare a orientarsi, inserire dati e usare le prime formule; si
+              prosegue con il livello base, poi con quello intermedio (tabelle pivot, filtri avanzati) e infine con il
+              livello avanzato (CERCA.X e funzioni di collegamento tra dati).
+            </p>
+            <div class="detail-tags">
+              <span class="tag">🎯 Percorso modulare</span>
+              <span class="tag">📈 Crescita progressiva</span>
+              <span class="tag">🛠️ Approccio pratico</span>
+            </div>
           </div>
-          <span class="course-arrow">→</span>
-        </a>
+        </details>
 
-        <a href="#corso-ai" class="course-card">
-          <div class="course-card-inner">
+        <details class="course-card accordion">
+          <summary class="course-card-inner">
             <span class="course-emoji">🤖</span>
             <div class="course-name">Capire l'Intelligenza Artificiale</div>
             <div class="course-desc">Cos'è, come funziona, perché ci riguarda.</div>
+          </summary>
+          <div class="accordion-content">
+            <p>
+              <strong>Cos'è, come funziona, perché ci riguarda.</strong><br><br>
+              Un incontro divulgativo per comprendere in modo chiaro cosa sia l'AI e come sta trasformando
+              lavoro e vita quotidiana. Concetti spiegati in modo semplice, con focus sugli impatti concreti.
+            </p>
+            <div class="detail-tags">
+              <span class="tag">🔎 Concetti semplici</span>
+              <span class="tag">💼 Impatti concreti</span>
+              <span class="tag">⚖️ Opportunità e limiti</span>
+            </div>
           </div>
-          <span class="course-arrow">→</span>
-        </a>
+        </details>
 
-        <a href="#ai-quotidiana" class="course-card">
-          <div class="course-card-inner">
+        <details class="course-card accordion">
+          <summary class="course-card-inner">
             <span class="course-emoji">✨</span>
             <div class="course-name">AI per la vita quotidiana</div>
             <div class="course-desc">ChatGPT, Copilot e strumenti utili ogni giorno.</div>
+          </summary>
+          <div class="accordion-content">
+            <p>
+              <strong>ChatGPT, Copilot e strumenti utili.</strong><br><br>
+              Un laboratorio pratico per imparare a utilizzare strumenti di intelligenza artificiale
+              nella vita di tutti i giorni: scrivere testi, ottenere supporto nello studio e nel lavoro,
+              usarli in modo consapevole e strategico.
+            </p>
+            <div class="detail-tags">
+              <span class="tag">✍️ Scrittura e testi</span>
+              <span class="tag">📊 Studio e lavoro</span>
+              <span class="tag">⚙️ Uso consapevole</span>
+            </div>
           </div>
-          <span class="course-arrow">→</span>
-        </a>
+        </details>
 
-        <a href="#ai-professioni" class="course-card">
-          <div class="course-card-inner">
+        <details class="course-card accordion">
+          <summary class="course-card-inner">
             <span class="course-emoji">👩‍💼</span>
             <div class="course-name">AI e professioni</div>
             <div class="course-desc">Strumenti di AI per settori professionali specifici.</div>
+          </summary>
+          <div class="accordion-content">
+            <p>
+              <strong>Strumenti per settori specifici.</strong><br><br>
+              Un corso dedicato a chi vuole integrare l'AI nel proprio ambito professionale.
+              Applicazioni concrete, automazione e ottimizzazione dei flussi di lavoro, casi reali.
+            </p>
+            <div class="detail-tags">
+              <span class="tag">📂 Applicazioni concrete</span>
+              <span class="tag">🛠️ Automazione</span>
+              <span class="tag">🎯 Casi reali</span>
+            </div>
           </div>
-          <span class="course-arrow">→</span>
-        </a>
+        </details>
 
-        <a href="#abc-digitale" class="course-card">
-          <div class="course-card-inner">
+        <details class="course-card accordion">
+          <summary class="course-card-inner">
             <span class="course-emoji">📘</span>
             <div class="course-name">ABC del Digitale</div>
             <div class="course-desc">Competenze base per la vita quotidiana.</div>
+          </summary>
+          <div class="accordion-content">
+            <p>
+              <strong>Competenze base per la vita quotidiana.</strong><br><br>
+              Un corso introduttivo pensato per acquisire sicurezza nell'uso di computer, internet
+              e strumenti digitali essenziali. Navigare in sicurezza, usare email e orientarsi
+              nel mondo digitale con autonomia.
+            </p>
+            <div class="detail-tags">
+              <span class="tag">🌐 Navigazione sicura</span>
+              <span class="tag">📧 Email e strumenti base</span>
+              <span class="tag">🧭 Autonomia digitale</span>
+            </div>
           </div>
-          <span class="course-arrow">→</span>
-        </a>
+        </details>
 
-        <a href="#smartphone-facile" class="course-card">
-          <div class="course-card-inner">
+        <details class="course-card accordion">
+          <summary class="course-card-inner">
             <span class="course-emoji">📱</span>
             <div class="course-name">Smartphone facile e sicuro</div>
             <div class="course-desc">Comunicare, proteggersi, imparare con il cellulare.</div>
+          </summary>
+          <div class="accordion-content">
+            <p>
+              <strong>Comunicare, proteggersi, imparare.</strong><br><br>
+              Un percorso pratico per usare lo smartphone con maggiore autonomia e sicurezza.
+              Funzioni essenziali, privacy, protezione dati e app utili spiegati passo per passo.
+            </p>
+            <div class="detail-tags">
+              <span class="tag">💬 Funzioni essenziali</span>
+              <span class="tag">🔐 Privacy e dati</span>
+              <span class="tag">📲 App utili</span>
+            </div>
           </div>
-          <span class="course-arrow">→</span>
-        </a>
+        </details>
 
-        <a href="#smartphone-su-misura" class="course-card">
-          <div class="course-card-inner">
+        <details class="course-card accordion">
+          <summary class="course-card-inner">
             <span class="course-emoji">⚙️</span>
             <div class="course-name">Smartphone su misura</div>
             <div class="course-desc">Regola il tuo cellulare passo per passo.</div>
+          </summary>
+          <div class="accordion-content">
+            <p>
+              <strong>Regola il tuo cellulare passo per passo.</strong><br><br>
+              Imparare a personalizzare impostazioni, notifiche e sicurezza.
+              Configurazioni guidate per avere maggiore controllo del proprio dispositivo.
+            </p>
+            <div class="detail-tags">
+              <span class="tag">🔧 Configurazioni guidate</span>
+              <span class="tag">🔔 Notifiche</span>
+              <span class="tag">🛡️ Controllo totale</span>
+            </div>
           </div>
-          <span class="course-arrow">→</span>
-        </a>
+        </details>
 
-        <a href="#google-smartphone" class="course-card">
-          <div class="course-card-inner">
+        <details class="course-card accordion">
+          <summary class="course-card-inner">
             <span class="course-emoji">🔎</span>
             <div class="course-name">Google e smartphone</div>
             <div class="course-desc">Account Google, Gmail, Play Store e sincronizzazione.</div>
+          </summary>
+          <div class="accordion-content">
+            <p>
+              <strong>Le basi per gestirlo in tranquillità.</strong><br><br>
+              Account Google, Gmail, Play Store e sincronizzazione spiegati con chiarezza.
+              Gestione account, email, calendario, archiviazione e backup.
+            </p>
+            <div class="detail-tags">
+              <span class="tag">☁️ Gestione account</span>
+              <span class="tag">📩 Email e calendario</span>
+              <span class="tag">📦 Backup e archiviazione</span>
+            </div>
           </div>
-          <span class="course-arrow">→</span>
-        </a>
+        </details>
 
-        <a href="#navigare-online" class="course-card">
-          <div class="course-card-inner">
+        <details class="course-card accordion">
+          <summary class="course-card-inner">
             <span class="course-emoji">🛍️</span>
             <div class="course-name">Navigare e acquistare online</div>
             <div class="course-desc">Guida pratica per acquisti sicuri in rete.</div>
+          </summary>
+          <div class="accordion-content">
+            <p>
+              <strong>Guida pratica per tutti.</strong><br><br>
+              Consigli concreti per acquistare online senza rischi.
+              Pagamenti sicuri, riconoscere truffe, monitorare ordini.
+            </p>
+            <div class="detail-tags">
+              <span class="tag">💳 Pagamenti sicuri</span>
+              <span class="tag">🚨 Riconoscere truffe</span>
+              <span class="tag">📦 Monitoraggio ordini</span>
+            </div>
           </div>
-          <span class="course-arrow">→</span>
-        </a>
+        </details>
 
-        <a href="#corso-digital" class="course-card">
-          <div class="course-card-inner">
+        <details class="course-card accordion">
+          <summary class="course-card-inner">
             <span class="course-emoji">💬</span>
             <div class="course-name">WhatsApp senza stress</div>
             <div class="course-desc">Messaggi, chiamate e buone maniere digitali.</div>
+          </summary>
+          <div class="accordion-content">
+            <p>
+              <strong>Messaggi, chiamate e buone maniere digitali.</strong><br><br>
+              Un incontro dedicato a imparare a usare WhatsApp in modo semplice e corretto,
+              evitando errori e confusione nei gruppi. Invio di foto, gestione dei gruppi, privacy e sicurezza.
+            </p>
+            <div class="detail-tags">
+              <span class="tag">📸 Foto e documenti</span>
+              <span class="tag">👥 Gestione gruppi</span>
+              <span class="tag">🔐 Privacy</span>
+            </div>
           </div>
-          <span class="course-arrow">→</span>
-        </a>
+        </details>
 
-        <a href="#fake-news" class="course-card">
-          <div class="course-card-inner">
+        <details class="course-card accordion">
+          <summary class="course-card-inner">
             <span class="course-emoji">📰</span>
             <div class="course-name">Le Fake News</div>
             <div class="course-desc">Riconoscerle, combatterle, capirne l'origine.</div>
+          </summary>
+          <div class="accordion-content">
+            <p>
+              <strong>Come si originano, come identificarle e combatterle.</strong><br><br>
+              Strumenti concreti per riconoscere notizie false e disinformazione.
+              Verifica delle fonti, dinamiche dei social e pensiero critico.
+            </p>
+            <div class="detail-tags">
+              <span class="tag">🔎 Verifica fonti</span>
+              <span class="tag">📲 Social e viralità</span>
+              <span class="tag">🧠 Pensiero critico</span>
+            </div>
           </div>
-          <span class="course-arrow">→</span>
-        </a>
+        </details>
 
-        <a href="#project-smart" class="course-card">
-          <div class="course-card-inner">
+        <details class="course-card accordion">
+          <summary class="course-card-inner">
             <span class="course-emoji">📋</span>
             <div class="course-name">Project Smart</div>
             <div class="course-desc">Organizza progetti e idee con strumenti digitali.</div>
+          </summary>
+          <div class="accordion-content">
+            <p>
+              <strong>Organizzare progetti e idee con strumenti digitali.</strong><br><br>
+              Strumenti pratici per pianificare attività e collaborare online.
+              Pianificazione efficace, condivisione e obiettivi chiari.
+            </p>
+            <div class="detail-tags">
+              <span class="tag">🗓️ Pianificazione</span>
+              <span class="tag">📂 Condivisione</span>
+              <span class="tag">🎯 Obiettivi</span>
+            </div>
           </div>
-          <span class="course-arrow">→</span>
-        </a>
+        </details>
 
-        <a href="#canva" class="course-card">
-          <div class="course-card-inner">
+        <details class="course-card accordion">
+          <summary class="course-card-inner">
             <span class="course-emoji">🎨</span>
             <div class="course-name">Canva per tutti</div>
             <div class="course-desc">Grafica facile per comunicare online.</div>
+          </summary>
+          <div class="accordion-content">
+            <p>
+              <strong>Grafica facile per comunicare online.</strong><br><br>
+              Creare grafiche, locandine e contenuti social in modo semplice.
+              Template pronti, personalizzazione creativa e condivisione immediata.
+            </p>
+            <div class="detail-tags">
+              <span class="tag">🖼️ Template pronti</span>
+              <span class="tag">✏️ Creatività</span>
+              <span class="tag">📲 Condivisione</span>
+            </div>
           </div>
-          <span class="course-arrow">→</span>
-        </a>
+        </details>
 
-        <a href="#microbit" class="course-card">
-          <div class="course-card-inner">
+        <details class="course-card accordion">
+          <summary class="course-card-inner">
             <span class="course-emoji">💡</span>
             <div class="course-name">Micro:bit Makers Lab</div>
             <div class="course-desc">Programma il tuo primo dispositivo intelligente.</div>
+          </summary>
+          <div class="accordion-content">
+            <p>
+              <strong>Programma il tuo primo dispositivo intelligente.</strong><br><br>
+              Coding ed elettronica con sensori e LED. Programmazione visuale,
+              esperimenti interattivi e creatività digitale.
+            </p>
+            <div class="detail-tags">
+              <span class="tag">💻 Programmazione visuale</span>
+              <span class="tag">🔁 Esperimenti</span>
+              <span class="tag">🚀 Creatività digitale</span>
+            </div>
           </div>
-          <span class="course-arrow">→</span>
-        </a>
+        </details>
 
         <a href="#corso-digital" class="course-card">
           <div class="course-card-inner">
@@ -1028,50 +1347,110 @@ nav {
       </div>
       <div class="course-grid">
 
-        <a href="#circuiti" class="course-card">
-          <div class="course-card-inner">
+        <details class="course-card accordion">
+          <summary class="course-card-inner">
             <span class="course-emoji">⚡</span>
             <div class="course-name">Tutti i Miei Circuiti</div>
             <div class="course-desc">Laboratorio pratico per entrare nel mondo dei circuiti.</div>
+          </summary>
+          <div class="accordion-content">
+            <p>
+              <strong>Un laboratorio pratico per entrare nel mondo dei circuiti elettrici ed elettronici.</strong><br><br>
+              Tra fili, batterie, LED e piccoli componenti, i partecipanti impareranno come funziona un circuito,
+              come si accende una luce e come dare energia alle proprie idee. Sperimentazione diretta,
+              comprensione dei concetti base (corrente, collegamenti, polarità) e costruzione di piccoli progetti funzionanti.
+              Un percorso perfetto per sviluppare logica, manualità e spirito di scoperta.
+            </p>
+            <div class="detail-tags">
+              <span class="tag">🔎 Sperimentazione</span>
+              <span class="tag">💡 Corrente e polarità</span>
+              <span class="tag">🛠️ Progetti funzionanti</span>
+            </div>
           </div>
-          <span class="course-arrow">→</span>
-        </a>
+        </details>
 
-        <a href="#robotica-lego" class="course-card">
-          <div class="course-card-inner">
+        <details class="course-card accordion">
+          <summary class="course-card-inner">
             <span class="course-emoji">🧱</span>
             <div class="course-name">Robotica con LEGO SPIKE Prime</div>
             <div class="course-desc">Costruisci, programma e impara con i LEGO.</div>
+          </summary>
+          <div class="accordion-content">
+            <p>
+              <strong>Costruisci, programma, impara.</strong><br><br>
+              Laboratorio di robotica educativa per costruire e programmare robot.
+              Costruzione meccanica, programmazione e sfide creative per imparare
+              i principi dell'ingegneria giocando.
+            </p>
+            <div class="detail-tags">
+              <span class="tag">⚙️ Costruzione meccanica</span>
+              <span class="tag">💻 Programmazione</span>
+              <span class="tag">🏁 Sfide creative</span>
+            </div>
           </div>
-          <span class="course-arrow">→</span>
-        </a>
+        </details>
 
-        <a href="#musica-piante" class="course-card">
-          <div class="course-card-inner">
+        <details class="course-card accordion">
+          <summary class="course-card-inner">
             <span class="course-emoji">🌿</span>
             <div class="course-name">La musica delle piante</div>
             <div class="course-desc">Creazione di un'opera sonora collettiva con sensori.</div>
+          </summary>
+          <div class="accordion-content">
+            <p>
+              <strong>Creazione di un'opera sonora collettiva.</strong><br><br>
+              Un laboratorio che unisce natura, tecnologia e suono.
+              Sensori e segnali naturali, composizione condivisa ed esperienza immersiva
+              per scoprire che la tecnologia è ovunque, anche nel mondo naturale.
+            </p>
+            <div class="detail-tags">
+              <span class="tag">🌱 Sensori naturali</span>
+              <span class="tag">🎼 Composizione condivisa</span>
+              <span class="tag">🎧 Esperienza immersiva</span>
+            </div>
           </div>
-          <span class="course-arrow">→</span>
-        </a>
+        </details>
 
-        <a href="#arduino" class="course-card">
-          <div class="course-card-inner">
+        <details class="course-card accordion">
+          <summary class="course-card-inner">
             <span class="course-emoji">🔧</span>
             <div class="course-name">Scopriamo Arduino</div>
             <div class="course-desc">Primi passi nella programmazione elettronica.</div>
+          </summary>
+          <div class="accordion-content">
+            <p>
+              <strong>Primi passi nella programmazione elettronica.</strong><br><br>
+              Introduzione alla piattaforma Arduino e ai suoi utilizzi.
+              Circuiti, sensori, programmazione base e costruzione di prototipi creativi.
+            </p>
+            <div class="detail-tags">
+              <span class="tag">⚡ Circuiti e sensori</span>
+              <span class="tag">💻 Programmazione base</span>
+              <span class="tag">🛠️ Prototipi creativi</span>
+            </div>
           </div>
-          <span class="course-arrow">→</span>
-        </a>
+        </details>
 
-        <a href="#makey-makey" class="course-card">
-          <div class="course-card-inner">
+        <details class="course-card accordion">
+          <summary class="course-card-inner">
             <span class="course-emoji">🎹</span>
             <div class="course-name">Makey Makey</div>
             <div class="course-desc">Sperimenta l'elettronica giocando con oggetti comuni.</div>
+          </summary>
+          <div class="accordion-content">
+            <p>
+              <strong>Sperimenta l'elettronica giocando.</strong><br><br>
+              Trasforma oggetti comuni in strumenti interattivi.
+              Conducibilità, giochi, musica e creatività tecnologica: scopri che qualsiasi cosa
+              può diventare un controller.
+            </p>
+            <div class="detail-tags">
+              <span class="tag">⚡ Conducibilità</span>
+              <span class="tag">🎮 Giochi e musica</span>
+              <span class="tag">🧠 Creatività tecnologica</span>
+            </div>
           </div>
-          <span class="course-arrow">→</span>
-        </a>
+        </details>
 
       </div>
     </div>
@@ -1080,156 +1459,11 @@ nav {
   <div class="divider"></div>
 
   
-  <!-- DETTAGLI ADULTI -->
+  <!-- DETTAGLI ADULTI 
   <section class="section" id="dettagli">
     <div class="section-label">Schede corso</div>
     <h2 class="section-title">Tutti i dettagli</h2>
-    <p class="section-subtitle">Clicca su una card qui sopra per navigare direttamente alla sezione.</p>
-
-    <div id="cybersecurity" class="detail-section" style="scroll-margin-top:80px;">
-      <h2>🛡️ Cybersecurity per tutti</h2>
-      <p>
-        <strong>Proteggi i tuoi dati nella vita di ogni giorno.</strong><br><br>
-        Un corso per riconoscere le principali minacce online e adottare comportamenti sicuri
-        nella navigazione, negli acquisti e nella comunicazione digitale.
-      </p>
-      <div class="detail-tags">
-        <span class="tag">🚨 Truffe e phishing</span>
-        <span class="tag">🔑 Password efficaci</span>
-        <span class="tag">🌐 Navigazione sicura</span>
-      </div>
-    </div>
-
-    <div id="excel" class="detail-section" style="scroll-margin-top:80px;">
-      <h2>📊 I nostri corsi Excel</h2>
-      <p>
-        <strong>Un percorso completo, dall'introduzione alle funzioni avanzate.</strong><br><br>
-        La nostra offerta formativa su Excel è strutturata come un percorso progressivo, pensato per accompagnare
-        ogni partecipante dal primo approccio fino alle funzionalità più avanzate di analisi e gestione dei dati.
-        Si parte dai corsi introduttivi per imparare a orientarsi, inserire dati e usare le prime formule; si
-        prosegue con il livello base, poi con quello intermedio (tabelle pivot, filtri avanzati) e infine con il
-        livello avanzato (CERCA.X e funzioni di collegamento tra dati).
-      </p>
-      <div class="detail-tags">
-        <span class="tag">🎯 Percorso modulare</span>
-        <span class="tag">📈 Crescita progressiva</span>
-        <span class="tag">🛠️ Approccio pratico</span>
-      </div>
-    </div>
-
-    <div id="corso-ai" class="detail-section" style="scroll-margin-top:80px;">
-      <h2>🤖 Capire l'Intelligenza Artificiale</h2>
-      <p>
-        <strong>Cos'è, come funziona, perché ci riguarda.</strong><br><br>
-        Un incontro divulgativo per comprendere in modo chiaro cosa sia l'AI e come sta trasformando
-        lavoro e vita quotidiana. Concetti spiegati in modo semplice, con focus sugli impatti concreti.
-      </p>
-      <div class="detail-tags">
-        <span class="tag">🔎 Concetti semplici</span>
-        <span class="tag">💼 Impatti concreti</span>
-        <span class="tag">⚖️ Opportunità e limiti</span>
-      </div>
-    </div>
-
-    <div id="ai-quotidiana" class="detail-section" style="scroll-margin-top:80px;">
-      <h2>✨ AI per la vita quotidiana</h2>
-      <p>
-        <strong>ChatGPT, Copilot e strumenti utili.</strong><br><br>
-        Un laboratorio pratico per imparare a utilizzare strumenti di intelligenza artificiale
-        nella vita di tutti i giorni: scrivere testi, ottenere supporto nello studio e nel lavoro,
-        usarli in modo consapevole e strategico.
-      </p>
-      <div class="detail-tags">
-        <span class="tag">✍️ Scrittura e testi</span>
-        <span class="tag">📊 Studio e lavoro</span>
-        <span class="tag">⚙️ Uso consapevole</span>
-      </div>
-    </div>
-
-    <div id="ai-professioni" class="detail-section" style="scroll-margin-top:80px;">
-      <h2>👩‍💼 AI e professioni</h2>
-      <p>
-        <strong>Strumenti per settori specifici.</strong><br><br>
-        Un corso dedicato a chi vuole integrare l'AI nel proprio ambito professionale.
-        Applicazioni concrete, automazione e ottimizzazione dei flussi di lavoro, casi reali.
-      </p>
-      <div class="detail-tags">
-        <span class="tag">📂 Applicazioni concrete</span>
-        <span class="tag">🛠️ Automazione</span>
-        <span class="tag">🎯 Casi reali</span>
-      </div>
-    </div>
-
-    <div id="abc-digitale" class="detail-section" style="scroll-margin-top:80px;">
-      <h2>📘 ABC del Digitale</h2>
-      <p>
-        <strong>Competenze base per la vita quotidiana.</strong><br><br>
-        Un corso introduttivo pensato per acquisire sicurezza nell'uso di computer, internet
-        e strumenti digitali essenziali. Navigare in sicurezza, usare email e orientarsi
-        nel mondo digitale con autonomia.
-      </p>
-      <div class="detail-tags">
-        <span class="tag">🌐 Navigazione sicura</span>
-        <span class="tag">📧 Email e strumenti base</span>
-        <span class="tag">🧭 Autonomia digitale</span>
-      </div>
-    </div>
-
-    <div id="smartphone-facile" class="detail-section" style="scroll-margin-top:80px;">
-      <h2>📱 Smartphone facile e sicuro</h2>
-      <p>
-        <strong>Comunicare, proteggersi, imparare.</strong><br><br>
-        Un percorso pratico per usare lo smartphone con maggiore autonomia e sicurezza.
-        Funzioni essenziali, privacy, protezione dati e app utili spiegati passo per passo.
-      </p>
-      <div class="detail-tags">
-        <span class="tag">💬 Funzioni essenziali</span>
-        <span class="tag">🔐 Privacy e dati</span>
-        <span class="tag">📲 App utili</span>
-      </div>
-    </div>
-
-    <div id="smartphone-su-misura" class="detail-section" style="scroll-margin-top:80px;">
-      <h2>⚙️ Smartphone su misura</h2>
-      <p>
-        <strong>Regola il tuo cellulare passo per passo.</strong><br><br>
-        Imparare a personalizzare impostazioni, notifiche e sicurezza.
-        Configurazioni guidate per avere maggiore controllo del proprio dispositivo.
-      </p>
-      <div class="detail-tags">
-        <span class="tag">🔧 Configurazioni guidate</span>
-        <span class="tag">🔔 Notifiche</span>
-        <span class="tag">🛡️ Controllo totale</span>
-      </div>
-    </div>
-
-    <div id="google-smartphone" class="detail-section" style="scroll-margin-top:80px;">
-      <h2>🔎 Google e smartphone</h2>
-      <p>
-        <strong>Le basi per gestirlo in tranquillità.</strong><br><br>
-        Account Google, Gmail, Play Store e sincronizzazione spiegati con chiarezza.
-        Gestione account, email, calendario, archiviazione e backup.
-      </p>
-      <div class="detail-tags">
-        <span class="tag">☁️ Gestione account</span>
-        <span class="tag">📩 Email e calendario</span>
-        <span class="tag">📦 Backup e archiviazione</span>
-      </div>
-    </div>
-
-    <div id="navigare-online" class="detail-section" style="scroll-margin-top:80px;">
-      <h2>🛍️ Navigare e acquistare online in sicurezza</h2>
-      <p>
-        <strong>Guida pratica per tutti.</strong><br><br>
-        Consigli concreti per acquistare online senza rischi.
-        Pagamenti sicuri, riconoscere truffe, monitorare ordini.
-      </p>
-      <div class="detail-tags">
-        <span class="tag">💳 Pagamenti sicuri</span>
-        <span class="tag">🚨 Riconoscere truffe</span>
-        <span class="tag">📦 Monitoraggio ordini</span>
-      </div>
-    </div>
+    <p class="section-subtitle">Espandi le card per vedere tutti i dettagli dei corsi.</p>
 
     <div id="corso-digital" class="detail-section" style="scroll-margin-top:80px;">
       <h2>💬 WhatsApp senza stress</h2>
@@ -1245,172 +1479,64 @@ nav {
       </div>
     </div>
 
-    <div id="fake-news" class="detail-section" style="scroll-margin-top:80px;">
-      <h2>📰 Le Fake News</h2>
-      <p>
-        <strong>Come si originano, come identificarle e combatterle.</strong><br><br>
-        Strumenti concreti per riconoscere notizie false e disinformazione.
-        Verifica delle fonti, dinamiche dei social e pensiero critico.
-      </p>
-      <div class="detail-tags">
-        <span class="tag">🔎 Verifica fonti</span>
-        <span class="tag">📲 Social e viralità</span>
-        <span class="tag">🧠 Pensiero critico</span>
-      </div>
-    </div>
-
-    <div id="project-smart" class="detail-section" style="scroll-margin-top:80px;">
-      <h2>📋 Project Smart</h2>
-      <p>
-        <strong>Organizzare progetti e idee con strumenti digitali.</strong><br><br>
-        Strumenti pratici per pianificare attività e collaborare online.
-        Pianificazione efficace, condivisione e obiettivi chiari.
-      </p>
-      <div class="detail-tags">
-        <span class="tag">🗓️ Pianificazione</span>
-        <span class="tag">📂 Condivisione</span>
-        <span class="tag">🎯 Obiettivi</span>
-      </div>
-    </div>
-
-    <div id="canva" class="detail-section" style="scroll-margin-top:80px;">
-      <h2>🎨 Canva per tutti</h2>
-      <p>
-        <strong>Grafica facile per comunicare online.</strong><br><br>
-        Creare grafiche, locandine e contenuti social in modo semplice.
-        Template pronti, personalizzazione creativa e condivisione immediata.
-      </p>
-      <div class="detail-tags">
-        <span class="tag">🖼️ Template pronti</span>
-        <span class="tag">✏️ Creatività</span>
-        <span class="tag">📲 Condivisione</span>
-      </div>
-    </div>
-
-    <div id="microbit" class="detail-section" style="scroll-margin-top:80px;">
-      <h2>💡 Micro:bit Makers Lab</h2>
-      <p>
-        <strong>Programma il tuo primo dispositivo intelligente.</strong><br><br>
-        Coding ed elettronica con sensori e LED. Programmazione visuale,
-        esperimenti interattivi e creatività digitale.
-      </p>
-      <div class="detail-tags">
-        <span class="tag">💻 Programmazione visuale</span>
-        <span class="tag">🔁 Esperimenti</span>
-        <span class="tag">🚀 Creatività digitale</span>
-      </div>
-    </div>
-
-    <!-- KIDS DETAILS -->
-    <div id="circuiti" class="detail-section" style="scroll-margin-top:80px;">
-      <h2>⚡ Tutti i Miei Circuiti</h2>
-      <p>
-        <strong>Un laboratorio pratico per entrare nel mondo dei circuiti elettrici ed elettronici.</strong><br><br>
-        Tra fili, batterie, LED e piccoli componenti, i partecipanti impareranno come funziona un circuito,
-        come si accende una luce e come dare energia alle proprie idee. Sperimentazione diretta,
-        comprensione dei concetti base (corrente, collegamenti, polarità) e costruzione di piccoli progetti funzionanti.
-        Un percorso perfetto per sviluppare logica, manualità e spirito di scoperta.
-      </p>
-      <div class="detail-tags">
-        <span class="tag">🔎 Sperimentazione</span>
-        <span class="tag">💡 Corrente e polarità</span>
-        <span class="tag">🛠️ Progetti funzionanti</span>
-      </div>
-    </div>
-
-    <div id="robotica-lego" class="detail-section" style="scroll-margin-top:80px;">
-      <h2>🧱 Robotica con LEGO SPIKE Prime</h2>
-      <p>
-        <strong>Costruisci, programma, impara.</strong><br><br>
-        Laboratorio di robotica educativa per costruire e programmare robot.
-        Costruzione meccanica, programmazione e sfide creative per imparare
-        i principi dell'ingegneria giocando.
-      </p>
-      <div class="detail-tags">
-        <span class="tag">⚙️ Costruzione meccanica</span>
-        <span class="tag">💻 Programmazione</span>
-        <span class="tag">🏁 Sfide creative</span>
-      </div>
-    </div>
-
-    <div id="musica-piante" class="detail-section" style="scroll-margin-top:80px;">
-      <h2>🌿 La musica delle piante</h2>
-      <p>
-        <strong>Creazione di un'opera sonora collettiva.</strong><br><br>
-        Un laboratorio che unisce natura, tecnologia e suono.
-        Sensori e segnali naturali, composizione condivisa ed esperienza immersiva
-        per scoprire che la tecnologia è ovunque, anche nel mondo naturale.
-      </p>
-      <div class="detail-tags">
-        <span class="tag">🌱 Sensori naturali</span>
-        <span class="tag">🎼 Composizione condivisa</span>
-        <span class="tag">🎧 Esperienza immersiva</span>
-      </div>
-    </div>
-
-    <div id="arduino" class="detail-section" style="scroll-margin-top:80px;">
-      <h2>🔧 Scopriamo Arduino</h2>
-      <p>
-        <strong>Primi passi nella programmazione elettronica.</strong><br><br>
-        Introduzione alla piattaforma Arduino e ai suoi utilizzi.
-        Circuiti, sensori, programmazione base e costruzione di prototipi creativi.
-      </p>
-      <div class="detail-tags">
-        <span class="tag">⚡ Circuiti e sensori</span>
-        <span class="tag">💻 Programmazione base</span>
-        <span class="tag">🛠️ Prototipi creativi</span>
-      </div>
-    </div>
-
-    <div id="makey-makey" class="detail-section" style="scroll-margin-top:80px;">
-      <h2>🎹 Makey Makey</h2>
-      <p>
-        <strong>Sperimenta l'elettronica giocando.</strong><br><br>
-        Trasforma oggetti comuni in strumenti interattivi.
-        Conducibilità, giochi, musica e creatività tecnologica: scopri che qualsiasi cosa
-        può diventare un controller.
-      </p>
-      <div class="detail-tags">
-        <span class="tag">⚡ Conducibilità</span>
-        <span class="tag">🎮 Giochi e musica</span>
-        <span class="tag">🧠 Creatività tecnologica</span>
-      </div>
-    </div>
-
+     
   </section>
+
 
   <div class="divider"></div>
 
-  <!-- CTA -->
-  <section class="section">
-    <div class="cta-section">
-      <div class="section-label">Resta aggiornato</div>
-      <h2 class="section-title" style="margin-bottom:12px;">Non perdere i prossimi corsi</h2>
-      <p>Iscriviti al nostro canale WhatsApp o alla newsletter per ricevere tutte le novità.</p>
-      <div class="cta-btns">
-        <a href="#" class="cta-btn cta-btn-primary">💬 Canale WhatsApp</a>
-        <a href="#" class="cta-btn cta-btn-ghost">📧 Newsletter</a>
-           <a href="https://techstationpadova.it/" class="cta-btn cta-btn-ghost">🌐 Sito Ufficiale </a>
-      </div>
-    </div>
-  </section>
+   blanker -->
+
+
 
   <!-- CONTATTI -->
   <section class="section" id="contatti">
-    <div class="contacts-section">
+    <div class="cta-section">
+      <div class="section-label">Resta aggiornato</div>
+      <h2 class="section-title" style="margin-bottom:12px;">Contatti</h2>
+      <div class="cta-btns" >
+         <p>Iscriviti al nostro canale WhatsApp o alla newsletter per ricevere tutte le novità.</p>
+      <div class="cta-btns">
+        <a href="#" class="cta-btn cta-btn-primary">📧 Newsletter</a>
+        <a href="#" class="cta-btn cta-btn-ghost">💬 Canale WhatsApp adulti </a>
+         <a href="#" class="cta-btn cta-btn-ghost">💬 Canale WhatsApp adulti </a>
+        
+           <a href="https://techstationpadova.it/" class="cta-btn cta-btn-ghost">🌐 Sito Ufficiale </a>
+      </div> 
+      <div class="contacts-section">
       <div>
         <h2>Contatti</h2>
         <p style="color:var(--text-muted); margin-top:4px;">Hai domande? Scrivici.</p>
       </div>
       <a href="/cdn-cgi/l/email-protection#620b0c040d221607010a111603160b0d0c0716114c0b16" class="contact-email"><span class="__cf_email__" data-cfemail="afc6c1c9c0efdbcaccc7dcdbcedbc6c0c1cadbdc81c6db">[email&#160;protected]</span></a>
     </div>
+  </section>       
+      </div>
+           </div>
   </section>
+
+
+  
+  
 
 </main>
 
 <footer>
   © Techstation ETS – Corsi gratuiti per tutti
 </footer>
+<script>
+const themeBtn = document.getElementById('theme-toggle-btn');
+const currentTheme = localStorage.getItem('theme') || 'dark';
+document.documentElement.setAttribute('data-theme', currentTheme);
+themeBtn.textContent = currentTheme === 'light' ? '☀️' : '🌙';
+themeBtn.addEventListener('click', function() {
+  const current = document.documentElement.getAttribute('data-theme');
+  const newTheme = current === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', newTheme);
+  localStorage.setItem('theme', newTheme);
+  themeBtn.textContent = newTheme === 'light' ? '☀️' : '🌙';
+});
+</script>
 <script>
 const API_URL = 'https://script.google.com/macros/s/AKfycbwp2gclUaxy7XMocDWCJzTSHb3NGiqJeA01-ZryoRZNLQNqtwNSNFgC58dZhWL0e0rWzw/exec';
 let allData = [], headers = [];
